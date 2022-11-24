@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,7 +30,7 @@ const Categories = () => {
                         <div className="card-body text-center">
                             <div className='flex items-center text-center'>
                                 <h2 className="card-title mr-5">{category?.categoryName}</h2>
-                                <div className="text-xl text-primary"><FaArrowRight /></div>
+                                <div className="text-xl text-primary"><Link to={`/category/${category?.categoryId}`}><FaArrowRight /></Link></div>
                             </div>
                         </div>
                     </div>)
