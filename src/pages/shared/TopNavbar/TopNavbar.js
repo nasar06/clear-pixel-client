@@ -38,7 +38,7 @@ const TopNavbar = () => {
                 >
                     <Dropdown.Header>
                         <span className="block text-sm">
-                            {user?.name ? user?.name : 'No Name'}
+                        {user?.displayName? user?.displayName : 'No Name'}
                         </span>
                         <span className="block truncate text-sm font-medium">
                             {user?.email ? user?.email : 'No email'}

@@ -8,25 +8,30 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const {signUp} = useContext(AuthContext)
+    const { signUp, UpdateProfileName } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const handelSignUp =(data) =>{
-        console.log(data.email)
-        
+    const handelSignUp = (data) => {
+        console.log(data.seller)
+
         signUp(data.email, data.password)
-        .then(result =>{
-            console.log(result)
-            navigate('/')
-        })
-        .then(err => console.error(err))
-    
-       }
+            .then(result => {
+                //update user
+                const info = {
+                    displayName: data.name
+                }
+                UpdateProfileName(info)
+                
+                navigate('/')
+            })
+            .then(err => console.error(err))
+
+    }
 
     return (
         <div className='flex items-center justify-center'>
             <div className='hidden md:block'>
-                <img style={{width: '800px'}} src={svg}></img>
+                <img style={{ width: '800px' }} src={svg}></img>
             </div>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl font-bold text-center'>Sign Up</h2>
@@ -59,6 +64,16 @@ const SignUp = () => {
                             className="input input-bordered w-full max-w-xs" />
                         <label className="label"> <span className="label-text">Forget Password?</span></label>
                         {/* {errors.password && <p className='text-red-600'>{errors.password?.message}</p>} */}
+                    </div>
+                    <div>
+                        <div className="form-control">
+                            <label className="label cursor-pointer justify-start">
+                                <input
+                                {...register("seller")}
+                                type="checkbox" className="checkbox checkbox-primary" />
+                                <span className="label-text font-bold ml-3">Are You Seller??</span>
+                            </label>
+                        </div>
                     </div>
                     <input className='btn bg-primary text-white font-bold w-full' value="Sign Up" type="submit" />
                     <div>
