@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 
 const SignUp = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const {signUp} = useContext(AuthContext)
+
+    const handelSignUp =(data) =>{
+        console.log(data.email)
+        
+        signUp(data.email, data.password)
+        .then(result =>{
+            console.log(result)
+        })
+        .then(err => console.error(err))
     
+       }
 
     return (
         <div className='flex items-center justify-center'>
@@ -16,7 +28,7 @@ const SignUp = () => {
             </div>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl font-bold text-center'>Sign Up</h2>
-                <form>
+                <form onSubmit={handleSubmit(handelSignUp)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Name</span></label>
                         <input type="text"

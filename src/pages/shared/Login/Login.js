@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    
+   const {signUp}  = useContext(AuthContext);
+
+   
 
     return (
         <div className='flex items-center justify-center'>

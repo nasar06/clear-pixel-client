@@ -8,7 +8,7 @@ const TopNavbar = () => {
 
     return (
 
-        <Navbar className='border my-12 w-10/12 mx-auto'
+        <Navbar className='border my-12'
             fluid={true}
             rounded={true}
         >
@@ -58,10 +58,10 @@ const TopNavbar = () => {
 
                 
                             <Navbar.Link>
-                                <Link to='/addService'>Add Service</Link>
+                                <Link to='/addService'>My products</Link>
                             </Navbar.Link>
                             <Navbar.Link>
-                                <Link to='/myReviews'>My Reviews</Link>
+                                <Link to='/myReviews'>All seller</Link>
                             </Navbar.Link>
                             <Navbar.Link>
                                 <Link>LogOut</Link>
