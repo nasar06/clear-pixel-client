@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
@@ -9,6 +9,7 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const {signUp} = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handelSignUp =(data) =>{
         console.log(data.email)
@@ -16,6 +17,7 @@ const SignUp = () => {
         signUp(data.email, data.password)
         .then(result =>{
             console.log(result)
+            navigate('/')
         })
         .then(err => console.error(err))
     

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
@@ -7,9 +7,17 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const {loginUser} = useContext(AuthContext)
+    const navigate = useNavigate()
 
-   const {signUp}  = useContext(AuthContext);
-
+    const handelLogin =(data) =>{
+        loginUser(data.email, data.password)
+        .then(result =>{
+            console.log(result)
+            navigate('/')
+        })
+        .then(err => console.error(err))
+    }
    
 
     return (
@@ -19,7 +27,7 @@ const Login = () => {
             </div>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl font-bold text-center'>Login</h2>
-                <form>
+                <form onSubmit={handleSubmit(handelLogin)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Email</span></label>
                         <input type="text"

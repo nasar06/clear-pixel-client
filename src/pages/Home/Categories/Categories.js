@@ -4,8 +4,8 @@ import { FaArrowRight } from "react-icons/fa";
 const Categories = () => {
     return (
         <div>
-            <h1 className='text-4xl my-12 font-bold'>Categories</h1>
-            <div className='grid grid-cols-3 gap-12'>
+            <h1 className='text-4xl mb-12 mt-24 font-bold'>Categories</h1>
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-12'>
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                     <div className="card-body text-center">
