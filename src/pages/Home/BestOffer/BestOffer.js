@@ -4,7 +4,7 @@ import React from 'react';
 const BestOffer = () => {
     return (
         <div>
-            <h1 className='mt-24 mb-12 text-4xl font-bold'>Best Offer</h1>
+            <h1 className='mt-24 mb-12 text-4xl font-bold text-center'>Todays Best Offer</h1>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-16'>
                 <div className="max-w-sm">
                     <Card
@@ -68,9 +68,9 @@ const BestOffer = () => {
                             </span>
                             <a
                                 href="#"
-                                className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
-                                Add to cart
+                                Order now
                             </a>
                         </div>
                     </Card>
@@ -137,9 +137,9 @@ const BestOffer = () => {
                             </span>
                             <a
                                 href="#"
-                                className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
-                                Add to cart
+                                Order now
                             </a>
                         </div>
                     </Card>
@@ -206,9 +206,9 @@ const BestOffer = () => {
                             </span>
                             <a
                                 href="#"
-                                className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
-                                Add to cart
+                                Order now
                             </a>
                         </div>
                     </Card>
