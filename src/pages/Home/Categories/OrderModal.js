@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import moment from 'moment';
 
 
 const OrderModal = ({modalData}) => {
@@ -18,7 +19,9 @@ const OrderModal = ({modalData}) => {
         const resalePrice = form.resalePrice.value;
         const userPhone = form.userPhone.value;
         const userLocation = form.userLocation.value;
-
+        const time = moment().format('Do MM YYYY, h:mm:ss a')
+        
+        console.log(time)
         const orderInfo = {
             userName,
             userEmail,
@@ -27,7 +30,8 @@ const OrderModal = ({modalData}) => {
             userPhone,
             userPhone,
             userLocation,
-            OrderId: _id
+            OrderId: _id,
+            time
         }
         console.log(orderInfo)
 

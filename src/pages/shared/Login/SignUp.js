@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const SignUp = () => {
@@ -13,7 +14,6 @@ const SignUp = () => {
 
     const handelSignUp = (data) => {
         console.log(data.seller)
-
         signUp(data.email, data.password)
             .then(result => {
                 //update user
@@ -22,10 +22,35 @@ const SignUp = () => {
                 }
                 UpdateProfileName(info)
                 
+                //post user 
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email,
+                        role: data.seller === true ? 'seller' : 'bayer'
+                    }
+                    userData(userInfo)
                 navigate('/')
             })
             .then(err => console.error(err))
 
+    }
+
+    const userData =(userInfo) =>{
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(userInfo)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('user inserted',data)
+            if(data.acknowledged){
+                toast.success('User Inserted Successfully')
+            }
+            
+        })
     }
 
     return (
