@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { signUp, UpdateProfileName } = useContext(AuthContext)
+    const { signUp, UpdateProfileName, loginWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handelSignUp = (data) => {
@@ -35,6 +35,17 @@ const SignUp = () => {
 
     }
 
+    //login with google
+    const handelGoogleLogin =()=>{
+        loginWithGoogle()
+        .then(result =>{
+            toast.success('successfully login')
+            navigate('/')
+        })
+        .then(err => console.log(err))
+    }
+
+    // post users collection
     const userData =(userInfo) =>{
         fetch('http://localhost:5000/users', {
             method: 'POST',
@@ -48,6 +59,7 @@ const SignUp = () => {
             console.log('user inserted',data)
             if(data.acknowledged){
                 toast.success('User Inserted Successfully')
+                
             }
             
         })
@@ -107,7 +119,7 @@ const SignUp = () => {
                 </form>
                 <p>You have an account <Link className='text-secondary' to="/login">Please login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handelGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

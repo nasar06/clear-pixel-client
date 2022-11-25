@@ -1,5 +1,6 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
+import { FaAlignLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import logo from '../../../img/logo.png'
@@ -26,9 +27,10 @@ const TopNavbar = () => {
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                 />
-                <span className="self-center whitespace-nowrap text-xl font-bold text-primary dark:text-white">
+                <span className="sm:none self-center whitespace-nowrap text-xl font-bold text-primary dark:text-white">
                     Clear Pixel
                 </span>
+                <label htmlFor="dashboard-drawer" className=" drawer-button lg:hidden ml-5 text-xl"><FaAlignLeft /></label>
             </Navbar.Brand>
             <div className="flex md:order-2">
                 <Dropdown
@@ -66,10 +68,13 @@ const TopNavbar = () => {
 
 
                 <Navbar.Link>
-                    <Link to='/addService'>My products</Link>
+                    <Link to='/myProducts'>My products</Link>
                 </Navbar.Link>
                 <Navbar.Link>
-                    <Link to='/myReviews'>All seller</Link>
+                    <Link to='/sellers'>All seller</Link>
+                </Navbar.Link>
+                <Navbar.Link>
+                    <Link to='/dashboard'>Dashboard</Link>
                 </Navbar.Link>
 
                 {

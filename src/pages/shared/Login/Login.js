@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const {loginUser} = useContext(AuthContext)
+    const {loginUser, loginWithGoogle} = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handelLogin =(data) =>{
@@ -17,6 +18,16 @@ const Login = () => {
             navigate('/')
         })
         .then(err => console.error(err))
+    }
+
+    //login with google
+    const handelGoogleLogin =()=>{
+        loginWithGoogle()
+        .then(result =>{
+            toast.success('successfully login')
+            navigate('/')
+        })
+        .then(err => console.log(err))
     }
    
 
@@ -55,7 +66,7 @@ const Login = () => {
                 </form>
                 <p>New to Clear Pixel <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handelGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

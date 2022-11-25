@@ -6,7 +6,7 @@ import moment from 'moment';
 
 
 const OrderModal = ({modalData}) => {
-    const {cameraName, resalePrice, _id} = modalData
+    const {cameraName, resalePrice, _id, img} = modalData
     const {user} = useContext(AuthContext)
 
 
@@ -31,7 +31,8 @@ const OrderModal = ({modalData}) => {
             userPhone,
             userLocation,
             OrderId: _id,
-            time
+            time,
+            img
         }
         console.log(orderInfo)
 
