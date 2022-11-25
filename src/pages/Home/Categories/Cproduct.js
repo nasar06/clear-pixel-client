@@ -3,13 +3,13 @@ import React from 'react';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const Cproduct = ({ camera, handelOrder }) => {
-    const { img, cameraName, location, originalPrice, resalePrice, use } = camera
+    const { img, productName, location, originalPrice, resalePrice, use } = camera
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl mt-24">
                 <figure><img style={{ width: '550px', height: '350px' }} src={img} alt="Album" /></figure>
                 <div className="card-body">
-                    <h2 className="card-title text-3xl font-bold">{cameraName}</h2>
+                    <h2 className="card-title text-3xl font-bold">{productName}</h2>
                     <div className='flex items-center justify-between mt-6'>
                         <span className='text-xl font-bold text-red-800 flex items-center gap-2'><FaMapMarkerAlt />{location}</span>
                         <span className='text-xl font-bold '>Years Of Use:<strong className='text-primary'>{use}</strong></span>

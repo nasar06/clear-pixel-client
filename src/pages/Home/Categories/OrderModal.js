@@ -3,6 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import moment from 'moment';
+import Loader from '../../shared/Loader/Loader';
 
 
 const OrderModal = ({modalData}) => {
@@ -21,20 +22,18 @@ const OrderModal = ({modalData}) => {
         const userLocation = form.userLocation.value;
         const time = moment().format('Do MM YYYY, h:mm:ss a')
         
-        console.log(time)
+     
         const orderInfo = {
             userName,
             userEmail,
             productName,
             resalePrice,
             userPhone,
-            userPhone,
             userLocation,
             OrderId: _id,
             time,
             img
         }
-        console.log(orderInfo)
 
         fetch('http://localhost:5000/orders', {
             method: 'POST',
@@ -54,7 +53,7 @@ const OrderModal = ({modalData}) => {
     }
 
     if(!user){
-        return <h1>loading..............</h1>
+        return <Loader></Loader>
     }
     return (
         <div>

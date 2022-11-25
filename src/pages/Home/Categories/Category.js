@@ -5,10 +5,9 @@ import Cproduct from './Cproduct';
 import OrderModal from './OrderModal';
 
 const Category = () => {
-    const {user, signOutUser} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
     const [modalData, setModalData] = useState([])
     const navigate = useNavigate()
-    const location = useLocation()
     const cameras = useLoaderData([])
 
     const handelOrder = (data)=>{

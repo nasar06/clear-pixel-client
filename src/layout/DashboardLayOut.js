@@ -18,7 +18,9 @@ const DashboardLayOut = () => {
                         {/* <!-- Sidebar content here --> */}
                         <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myOrders'>My Orders</Link>
                         <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myProducts'>My Products</Link>
-                        <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link>
+                        {/* <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link> */}
+                        <Link className='mb-5 text-xl font-bold underline' to='/dashboard/addProduct'>Add Product</Link>
+                        
                         
                         
                     </ul>
