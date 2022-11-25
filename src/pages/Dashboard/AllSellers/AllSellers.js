@@ -5,13 +5,22 @@ import React from 'react';
 const AllSellers = () => {
 
     const {data:allSellers=[]} = useQuery({
-        queryKey: ['allSellers'],
+        queryKey: ['seller'],
         queryFn: async()=>{
-            const res = await fetch('http://localhost:5000/allSellers')
+            const res = await fetch(`http://localhost:5000/usersRole/${'seller'}`)
             const data = await res.json()
             return data
         }
     })
+
+    //delete seller
+    const handelDelete =(id) =>{
+        // fetch(`http://localhost:5000/seller/${id}`,{
+        //     method: 'DELETE'
+        // })
+    }
+
+
     return (
         <div>
             <Table hoverable={true}>
@@ -39,7 +48,7 @@ const AllSellers = () => {
                         </Table.Cell>
                         
                         <Table.Cell>
-                            <button className='btn btn-sm btn-error'>Delete</button>
+                            <button onClick={()=>handelDelete(seller?._id)} className='btn btn-sm btn-error'>Delete</button>
                         </Table.Cell>
                     </Table.Row>
                     )

@@ -5,9 +5,9 @@ import React from 'react';
 const AllBuyers = () => {
 
     const {data:allBuyers=[]} = useQuery({
-        queryKey: ['allBuyers'],
+        queryKey: ['buyer'],
         queryFn: async()=>{
-            const res = await fetch('http://localhost:5000/allBuyers')
+            const res = await fetch(`http://localhost:5000/usersRole/${'buyer'}`)
             const data = await res.json()
             return data
         }
@@ -17,10 +17,10 @@ const AllBuyers = () => {
             <Table hoverable={true}>
                 <Table.Head>
                     <Table.HeadCell>
-                        Seller Name
+                        Buyer Name
                     </Table.HeadCell>
                     <Table.HeadCell>
-                        Seller Email
+                        Buyer Email
                     </Table.HeadCell>
                     <Table.HeadCell>
                         status

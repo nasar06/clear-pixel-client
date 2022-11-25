@@ -3,9 +3,11 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import moment from 'moment';
 import toast from 'react-hot-toast';
 import Loader from '../../shared/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handelOrder = (e) => {
         e.preventDefault()
@@ -54,6 +56,7 @@ const AddProduct = () => {
             console.log('add product-------',data)
             if(data.acknowledged){
                 toast.success('Your Order is successful')
+                navigate('/dashboard/myProducts')
             }
 
         })

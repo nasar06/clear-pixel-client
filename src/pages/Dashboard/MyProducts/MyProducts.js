@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Loader from '../../shared/Loader/Loader';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
 
-    const { data: sellerProducts = [] } = useQuery({
+    //get sellerProducts
+    const { data: sellerProducts = [], refetch } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`)
@@ -16,6 +18,29 @@ const MyProducts = () => {
 
         }
     })
+
+    //delete sellers product
+    const handelDelete =(id) =>{
+        fetch(`http://localhost:5000/myProducts/${id}`,{
+            method : 'DELETE'
+        })
+        .then(data =>{
+            toast.success('product is deleted')
+            refetch()
+        })
+        .catch(err => console.error(err))
+    }
+
+    //put one property
+    const handelAdvertised =(id) =>{
+        fetch(`http://localhost:5000/advertise/${id}`,{
+            method: 'PUT'
+        })
+        .then(data =>{
+            toast.success('Advertised your Product')
+        })
+        .catch(err => console.error(err))
+    }
 
     if (!user) {
         return <Loader></Loader>
@@ -43,9 +68,11 @@ const MyProducts = () => {
                 <Table.Body className="divide-y">
                     {
                         sellerProducts &&
-                        sellerProducts.map(sellerProduct => <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                        sellerProducts.map(sellerProduct => <Table.Row 
+                            key={sellerProduct?._id}
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                {sellerProduct?.productName.slice(0, 50) + '...'}
+                                {sellerProduct?.productName.slice(0, 40) + '...'}
                                 {/* {description.slice(0, 100) + '...'} */}
                             </Table.Cell>
                             <Table.Cell>
@@ -55,11 +82,11 @@ const MyProducts = () => {
                             {sellerProduct?.resalePrice}
                             </Table.Cell>
                             <Table.Cell>
-                            <button className='px-3 bg-primary text-white rounded'>Sold</button>
+                            <button onClick={()=>handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
                             {/* <button className='px-3 bg-primary text-white rounded'>Available</button> */}
                             </Table.Cell>
                             <Table.Cell>
-                                <button className='btn btn-sm btn-error'>Delete</button>
+                                <button onClick={()=>handelDelete(sellerProduct?._id)} className='btn btn-sm btn-error'>Delete</button>
                             </Table.Cell>
                         </Table.Row>
                         )

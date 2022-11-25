@@ -28,13 +28,21 @@ const DashboardLayOut = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
+
+                        {
+                            !isAdmin && !isSeller &&
                         <Link to='/dashboard/myOrders' className='mb-5 text-xl font-bold underline'>My Orders</Link>
-                        <Link to='/dashboard/myProducts' className='mb-5 text-xl font-bold underline' >My Products</Link>
+                        }
+
                         {/* <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link> */}
 
                         {
                             isSeller &&
-                            <Link to='/dashboard/addProduct' className='mb-5 text-xl font-bold underline'>Add Product</Link>
+                            <>
+                                <Link to='/dashboard/addProduct' className='mb-5 text-xl font-bold underline'>Add Product</Link>
+                                <Link to='/dashboard/myProducts' className='mb-5 text-xl font-bold underline' >My Products</Link>
+                            
+                            </>
 
                         }
                         {

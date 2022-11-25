@@ -1,40 +1,44 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loader from '../../shared/Loader/Loader';
 
 const Advertised = () => {
+
+    const {data:addProducts=[]} = useQuery({
+        queryKey: ['advertise'],
+        queryFn: async()=>{
+            const res = await fetch(`http://localhost:5000/advertise/${'add'}`)
+            const data = await res.json()
+            return data
+        }
+    })
+
+    console.log('add----------', addProducts)
+    if(addProducts ==0){
+        return
+    }
     return (
         <div>
             <h1 className='mt-24 text-center mb-12 text-4xl font-bold'>ADVERTISED</h1>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-10'>
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure><img src="https://placeimg.com/200/280/arch" alt="Movie" /></figure>
+                {
+                    addProducts &&
+                    addProducts.map(addProduct => <div 
+                    key={addProduct?._id}
+                    className="card card-side bg-base-100 shadow-xl">
+                    <figure><img src={addProduct?.img} alt="Movie" /></figure>
                     <div className="card-body">
-                        <h2 className="card-title">New movie is released!</h2>
-                        <p>Click the button to watch on Jetflix app.</p>
+                        <h2 className="card-title">{addProduct?.productName}</h2>
+                        <h3 className='text-xl '>OriginalPrice: $<span className='line-through text-red-600 font-bold'>{addProduct?.originalPrice}</span></h3>
+                        <h3 className='text-xl '>ResellPrice: <span className='font-bold'>${addProduct?.resalePrice}</span></h3>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Watch</button>
+                            <button className="btn btn-primary text-white">Details</button>
                         </div>
                     </div>
                 </div>
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure><img src="https://placeimg.com/200/280/arch" alt="Movie" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">New movie is released!</h2>
-                        <p>Click the button to watch on Jetflix app.</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Watch</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure><img src="https://placeimg.com/200/280/arch" alt="Movie" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">New movie is released!</h2>
-                        <p>Click the button to watch on Jetflix app.</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Watch</button>
-                        </div>
-                    </div>
-                </div>
+                )
+                }
+                
             </div>
         </div>
     );

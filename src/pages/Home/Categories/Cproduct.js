@@ -7,7 +7,7 @@ const Cproduct = ({ camera, handelOrder }) => {
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl mt-24">
-                <figure><img style={{ width: '550px', height: '350px' }} src={img} alt="Album" /></figure>
+                <figure><img style={{ width: '400px', height: '350px' }} src={img} alt="Album" /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-3xl font-bold">{productName}</h2>
                     <div className='flex items-center justify-between mt-6'>
