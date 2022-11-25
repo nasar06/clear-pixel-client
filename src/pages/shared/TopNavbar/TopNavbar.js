@@ -74,9 +74,7 @@ const TopNavbar = () => {
                 {
                     user?.uid ?
                         <>
-                            <Navbar.Link>
-                                <Link to='/dashboard/myProducts'>My products</Link>
-                            </Navbar.Link>
+                        
 
                             <Navbar.Link>
                                 <Link to='/dashboard'>Dashboard</Link>

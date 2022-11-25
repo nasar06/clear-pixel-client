@@ -28,7 +28,7 @@ const Advertised = () => {
                     className="card card-side bg-base-100 shadow-xl">
                     <figure><img src={addProduct?.img} alt="Movie" /></figure>
                     <div className="card-body">
-                        <h2 className="card-title">{addProduct?.productName}</h2>
+                        {/* <h2 className="card-title">{addProduct?.productName.slice(0, 10 + '...')}</h2> */}
                         <h3 className='text-xl '>OriginalPrice: $<span className='line-through text-red-600 font-bold'>{addProduct?.originalPrice}</span></h3>
                         <h3 className='text-xl '>ResellPrice: <span className='font-bold'>${addProduct?.resalePrice}</span></h3>
                         <div className="card-actions justify-end">

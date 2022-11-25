@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
 
-    const {data:allBuyers=[]} = useQuery({
+    const {data:allBuyers=[], refetch} = useQuery({
         queryKey: ['buyer'],
         queryFn: async()=>{
             const res = await fetch(`http://localhost:5000/usersRole/${'buyer'}`)
@@ -12,6 +13,19 @@ const AllBuyers = () => {
             return data
         }
     })
+
+
+    //delete Buyer
+    const handelDelete =(id) =>{
+        fetch(`http://localhost:5000/user/${id}`,{
+            method: 'DELETE'
+        })
+        .then(data => {
+            toast.success('Buyer is deleted')
+            refetch()
+        })
+        .catch(err => console.error(err))
+    }
     return (
         <div>
             <Table hoverable={true}>
@@ -30,7 +44,9 @@ const AllBuyers = () => {
                 
                     {
                         allBuyers &&
-                        allBuyers.map(buyer => <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                        allBuyers.map(buyer => <Table.Row 
+                        key={buyer?._id}
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                             {buyer?.name}
                         </Table.Cell>
@@ -39,7 +55,7 @@ const AllBuyers = () => {
                         </Table.Cell>
                         
                         <Table.Cell>
-                            <button className='btn btn-sm btn-error'>Delete</button>
+                            <button onClick={()=>handelDelete(buyer?._id)} className='btn btn-sm btn-error'>Delete</button>
                         </Table.Cell>
                     </Table.Row>
                     )

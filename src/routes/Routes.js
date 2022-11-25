@@ -7,6 +7,7 @@ import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import Category from "../pages/Home/Categories/Category";
 import Home from "../pages/Home/Home";
+import ErrorPage from "../pages/shared/ErrorPage/ErrorPage";
 import Login from "../pages/shared/Login/Login";
 import SignUp from "../pages/shared/Login/SignUp";
 import AdminRoute from "./AdminRoute";
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             }
         ]
+    },
+    {
+        path:'*',
+        element: <ErrorPage></ErrorPage>
     }
 ])
 
