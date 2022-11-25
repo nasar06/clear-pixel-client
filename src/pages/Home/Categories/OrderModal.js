@@ -7,7 +7,7 @@ import Loader from '../../shared/Loader/Loader';
 
 
 const OrderModal = ({modalData}) => {
-    const {cameraName, resalePrice, _id, img} = modalData
+    const {productName, resalePrice, _id, img} = modalData
     const {user} = useContext(AuthContext)
 
 
@@ -95,7 +95,7 @@ const OrderModal = ({modalData}) => {
                                     name='productName'
                                     type="text"
                                     disabled
-                                    defaultValue={cameraName} 
+                                    defaultValue={productName} 
                                     className="input input-bordered w-full max-w-xs" />
                                 </div>
                                 <div className="form-control w-full max-w-xs">

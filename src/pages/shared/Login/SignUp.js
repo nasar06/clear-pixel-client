@@ -1,58 +1,72 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import { async } from '@firebase/util';
 
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [role, setRole] = useState(false)
+    
 
     const { signUp, UpdateProfileName, loginWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const handelSignUp = (data) => {
-        console.log(data.seller)
-        signUp(data.email, data.password)
-            .then(result => {
-                //update user
-                const info = {
-                    displayName: data.name
-                }
-                UpdateProfileName(info)
-                
-                //post user 
-                    const userInfo = {
-                        name: data.name,
-                        email: data.email,
-                        role: data.seller === true ? 'seller' : 'bayer'
-                    }
-                    userData(userInfo)
-                navigate('/')
-            })
-            .then(err => console.error(err))
+    const handelSignUp = async (data) => {
+        
+        try {
+            const user = await signUp(data.email, data.password);
 
+            //update name
+            const info = {displayName: data.name}
+            await UpdateProfileName(info);
+
+            //post user
+             userData(user.user)
+
+            navigate('/')
+
+        } catch (error) {
+            console.log(error)
+        }
+            
+                
+                
     }
 
+
+
     //login with google
-    const handelGoogleLogin =()=>{
-        loginWithGoogle()
-        .then(result =>{
+    const handelGoogleLogin =async ()=>{
+        try {
+            const user = await loginWithGoogle()
             toast.success('successfully login')
             navigate('/')
-        })
-        .then(err => console.log(err))
+            userData(user.user)
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
+
+
     }
 
     // post users collection
-    const userData =(userInfo) =>{
+    const userData = (userInfo) =>{
+        const user = {
+            name : userInfo.displayName,
+            email: userInfo.email,
+            role: role ? 'seller' : 'buyer'
+        }
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(userInfo)
+            body:JSON.stringify(user)
         })
         .then(res => res.json())
         .then(data => {
@@ -106,7 +120,8 @@ const SignUp = () => {
                         <div className="form-control">
                             <label className="label cursor-pointer justify-start">
                                 <input
-                                {...register("seller")}
+                                {...register("role")}
+                                onChange={()=>setRole(!role)}
                                 type="checkbox" className="checkbox checkbox-primary" />
                                 <span className="label-text font-bold ml-3">Are You Seller??</span>
                             </label>

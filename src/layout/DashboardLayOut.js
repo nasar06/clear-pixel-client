@@ -20,6 +20,8 @@ const DashboardLayOut = () => {
                         <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myProducts'>My Products</Link>
                         {/* <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link> */}
                         <Link className='mb-5 text-xl font-bold underline' to='/dashboard/addProduct'>Add Product</Link>
+                        <Link className='mb-5 text-xl font-bold underline' to='/dashboard/allSellers'>All Sellers</Link>
+                        <Link className='mb-5 text-xl font-bold underline' to='/dashboard/allBuyers'>All Buyers</Link>
                         
                         
                         

@@ -1,11 +1,14 @@
 import DashboardLayOut from "../layout/DashboardLayOut";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
+import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import Category from "../pages/Home/Categories/Category";
 import Home from "../pages/Home/Home";
 import Login from "../pages/shared/Login/Login";
 import SignUp from "../pages/shared/Login/SignUp";
+import AdminRoute from "./AdminRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../layout/Main");
@@ -54,6 +57,14 @@ const router = createBrowserRouter([
                 path: '/dashboard/myProducts',
                 element: <MyProducts></MyProducts>
             },
+            {
+                path: '/dashboard/allSellers',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+            },
+            {
+                path: '/dashboard/allBuyers',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            }
         ]
     }
 ])

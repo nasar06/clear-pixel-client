@@ -26,8 +26,35 @@ const Login = () => {
         .then(result =>{
             toast.success('successfully login')
             navigate('/')
+            userData(result.user)
         })
         .then(err => console.log(err))
+    }
+
+
+    //post users
+    const userData = (userInfo) =>{
+        const user = {
+            name : userInfo.displayName,
+            email: userInfo.email,
+            role: 'buyer'
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('user inserted',data)
+            if(data.acknowledged){
+                toast.success('User Inserted Successfully')
+                
+            }
+            
+        })
     }
    
 

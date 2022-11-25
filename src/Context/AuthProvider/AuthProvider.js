@@ -8,31 +8,37 @@ const auth = getAuth(app)
 console.log(auth)
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoadin]= useState(true)
     const googleProvider = new GoogleAuthProvider()
 
     //create User with Email and password
     const signUp = (email, password) =>{
+        setIsLoadin(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     //login with email and password
     const loginUser = (email, password) =>{
+        setIsLoadin(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     //signOut 
     const signOutUser = ()=>{
+        setIsLoadin(true)
         return signOut(auth)
     }
 
     //update Profile name
     const UpdateProfileName =(userInfo)=>{
+        setIsLoadin(true)
         return updateProfile(auth.currentUser, userInfo)
     }
 
     //login with google
     const loginWithGoogle = () =>{
+        setIsLoadin(true)
         return signInWithPopup(auth, googleProvider)
     }
 
@@ -40,7 +46,8 @@ const AuthProvider = ({children}) => {
     //observe user
     useEffect( ()=>{
         const unSubscribe = onAuthStateChanged(auth, currentUser=>{
-            setUser(currentUser)
+            setUser(currentUser);
+            setIsLoadin(false)
         })
         return ()=> unSubscribe()
     },[])
@@ -51,7 +58,8 @@ const AuthProvider = ({children}) => {
         signOutUser,
         UpdateProfileName,
         loginWithGoogle,
-        user
+        user,
+        isLoading
     }
     return (
         <div>

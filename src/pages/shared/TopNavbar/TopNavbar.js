@@ -1,18 +1,20 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { FaAlignLeft } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import logo from '../../../img/logo.png'
 
 const TopNavbar = () => {
     const { user, signOutUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
-
-    const handelSignOut =()=>{
+    const handelSignOut = () => {
         signOutUser()
-        .then(()=>{})
-        .then((err)=>console.error(err))
+            .then(() => {
+                navigate('/login')
+             })
+            .then((err) => console.error(err))
     }
 
     return (
@@ -40,7 +42,7 @@ const TopNavbar = () => {
                 >
                     <Dropdown.Header>
                         <span className="block text-sm">
-                        {user?.displayName? user?.displayName : 'No Name'}
+                            {user?.displayName ? user?.displayName : 'No Name'}
                         </span>
                         <span className="block truncate text-sm font-medium">
                             {user?.email ? user?.email : 'No email'}
@@ -67,21 +69,22 @@ const TopNavbar = () => {
                 </Navbar.Link>
 
 
-                <Navbar.Link>
-                    <Link to='/myProducts'>My products</Link>
-                </Navbar.Link>
-                <Navbar.Link>
-                    <Link to='/sellers'>All seller</Link>
-                </Navbar.Link>
-                <Navbar.Link>
-                    <Link to='/dashboard'>Dashboard</Link>
-                </Navbar.Link>
+
 
                 {
                     user?.uid ?
-                        <Navbar.Link>
-                            <Link onClick={handelSignOut}>LogOut</Link>
-                        </Navbar.Link>
+                        <>
+                            <Navbar.Link>
+                                <Link to='/dashboard/myProducts'>My products</Link>
+                            </Navbar.Link>
+
+                            <Navbar.Link>
+                                <Link to='/dashboard'>Dashboard</Link>
+                            </Navbar.Link>
+                            <Navbar.Link>
+                                <Link onClick={handelSignOut}>LogOut</Link>
+                            </Navbar.Link>
+                        </>
                         :
 
                         <Navbar.Link>
