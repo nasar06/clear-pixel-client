@@ -1,21 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../../Hooks/Token/useToken';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const {loginUser, loginWithGoogle} = useContext(AuthContext)
+    const [userEmail, setUserEmail] = useState('')
+    const [token] = useToken(userEmail)
     const navigate = useNavigate()
 
+
+    if(token){
+        navigate('/')
+    }
     const handelLogin =(data) =>{
         loginUser(data.email, data.password)
         .then(result =>{
-            console.log(result)
-            navigate('/')
+            setUserEmail(result.user.email)
+            
         })
         .then(err => console.error(err))
     }
@@ -51,7 +58,7 @@ const Login = () => {
             console.log('user inserted',data)
             if(data.acknowledged){
                 toast.success('User Inserted Successfully')
-                
+                setUserEmail(userInfo.email)
             }
             
         })

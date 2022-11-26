@@ -5,48 +5,55 @@ import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import { async } from '@firebase/util';
+import useToken from '../../../Hooks/Token/useToken';
 
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [role, setRole] = useState(false)
-    
-
+    const [userEmail, setUserEmail] = useState('')
+    const [token] = useToken(userEmail)
     const { signUp, UpdateProfileName, loginWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
 
+
+    if (token) {
+        navigate('/')
+    }
+
+
     const handelSignUp = async (data) => {
-        
+
         try {
             const user = await signUp(data.email, data.password);
 
+            
             //update name
-            const info = {displayName: data.name}
+            const info = { displayName: data.name }
             await UpdateProfileName(info);
 
             //post user
-             userData(user.user)
-
-            navigate('/')
+            userData(user.user)
+            
 
         } catch (error) {
             console.log(error)
         }
-            
-                
-                
+
+
+
     }
 
 
 
     //login with google
-    const handelGoogleLogin =async ()=>{
+    const handelGoogleLogin = async () => {
         try {
             const user = await loginWithGoogle()
             toast.success('successfully login')
             navigate('/')
             userData(user.user)
-            
+
         } catch (error) {
             toast.error(error.message)
         }
@@ -55,9 +62,9 @@ const SignUp = () => {
     }
 
     // post users collection
-    const userData = (userInfo) =>{
+    const userData = (userInfo) => {
         const user = {
-            name : userInfo.displayName,
+            name: userInfo.displayName,
             email: userInfo.email,
             role: role ? 'seller' : 'buyer'
         }
@@ -66,17 +73,19 @@ const SignUp = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(user)
+            body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log('user inserted',data)
-            if(data.acknowledged){
-                toast.success('User Inserted Successfully')
+            .then(res => res.json())
+            .then(data => {
                 
-            }
-            
-        })
+
+                if (data.acknowledged) {
+                    toast.success('User Inserted Successfully')
+                    setUserEmail(userInfo.email)
+
+                }
+
+            })
     }
 
     return (
@@ -120,9 +129,9 @@ const SignUp = () => {
                         <div className="form-control">
                             <label className="label cursor-pointer justify-start">
                                 <input
-                                {...register("role")}
-                                onChange={()=>setRole(!role)}
-                                type="checkbox" className="checkbox checkbox-primary" />
+                                    {...register("role")}
+                                    onChange={() => setRole(!role)}
+                                    type="checkbox" className="checkbox checkbox-primary" />
                                 <span className="label-text font-bold ml-3">Are You Seller??</span>
                             </label>
                         </div>

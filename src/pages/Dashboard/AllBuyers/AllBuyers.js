@@ -8,7 +8,11 @@ const AllBuyers = () => {
     const {data:allBuyers=[], refetch} = useQuery({
         queryKey: ['buyer'],
         queryFn: async()=>{
-            const res = await fetch(`http://localhost:5000/usersRole/${'buyer'}`)
+            const res = await fetch(`http://localhost:5000/usersRole/${'buyer'}`,{
+                headers:{
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            })
             const data = await res.json()
             return data
         }
