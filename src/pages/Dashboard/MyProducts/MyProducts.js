@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Loader from '../../shared/Loader/Loader';
 
@@ -20,26 +21,27 @@ const MyProducts = () => {
     })
 
     //delete sellers product
-    const handelDelete =(id) =>{
-        fetch(`http://localhost:5000/myProducts/${id}`,{
-            method : 'DELETE'
+    const handelDelete = (id) => {
+        fetch(`http://localhost:5000/myProducts/${id}`, {
+            method: 'DELETE'
         })
-        .then(data =>{
-            toast.success('product is deleted')
-            refetch()
-        })
-        .catch(err => console.error(err))
+            .then(data => {
+                toast.success('product is deleted')
+                refetch()
+            })
+            .catch(err => console.error(err))
     }
 
     //put one property
-    const handelAdvertised =(id) =>{
-        fetch(`http://localhost:5000/advertise/${id}`,{
+    const handelAdvertised = (id) => {
+        fetch(`http://localhost:5000/advertise/${id}`, {
             method: 'PUT'
         })
-        .then(data =>{
-            toast.success('Advertised your Product')
-        })
-        .catch(err => console.error(err))
+            .then(data => {
+                toast.success('Advertised your Product')
+                refetch()
+            })
+            .catch(err => console.error(err))
     }
 
     if (!user) {
@@ -68,25 +70,32 @@ const MyProducts = () => {
                 <Table.Body className="divide-y">
                     {
                         sellerProducts &&
-                        sellerProducts.map(sellerProduct => <Table.Row 
+                        sellerProducts.map(sellerProduct => <Table.Row
                             key={sellerProduct?._id}
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                            className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                 {sellerProduct?.productName.slice(0, 40) + '...'}
                                 {/* {description.slice(0, 100) + '...'} */}
                             </Table.Cell>
                             <Table.Cell>
-                            {sellerProduct?.location}
+                                {sellerProduct?.location}
                             </Table.Cell>
                             <Table.Cell>
-                            {sellerProduct?.resalePrice}
+                                {sellerProduct?.resalePrice}
                             </Table.Cell>
                             <Table.Cell>
-                            <button onClick={()=>handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
-                            {/* <button className='px-3 bg-primary text-white rounded'>Available</button> */}
+                                {
+                                    sellerProduct?.advertise === 'add' ?
+
+                                    <button className='px-3 bg-primary text-white rounded'>Added</button>
+                                    :
+                                    <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
+                                }
+
                             </Table.Cell>
                             <Table.Cell>
-                                <button onClick={()=>handelDelete(sellerProduct?._id)} className='btn btn-sm btn-error'>Delete</button>
+                            <button onClick={() => handelDelete(sellerProduct?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+                               
                             </Table.Cell>
                         </Table.Row>
                         )

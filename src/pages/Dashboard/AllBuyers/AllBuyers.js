@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const AllBuyers = () => {
 
@@ -30,8 +31,14 @@ const AllBuyers = () => {
         })
         .catch(err => console.error(err))
     }
+
+    if(allBuyers == 0){
+        return <h1 className='text-error mb-5 text-center'>No Buyers Available</h1>
+        
+    }
     return (
         <div>
+            <h1 className='text-2xl text-primary text-center font-bold my-5'>All Buyers</h1>
             <Table hoverable={true}>
                 <Table.Head>
                     <Table.HeadCell>
@@ -59,7 +66,8 @@ const AllBuyers = () => {
                         </Table.Cell>
                         
                         <Table.Cell>
-                            <button onClick={()=>handelDelete(buyer?._id)} className='btn btn-sm btn-error'>Delete</button>
+                        <button onClick={()=>handelDelete(buyer?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+                            
                         </Table.Cell>
                     </Table.Row>
                     )

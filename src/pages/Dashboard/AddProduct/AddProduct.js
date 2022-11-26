@@ -19,7 +19,6 @@ const AddProduct = () => {
         const originalPrice = form.originalPrice.value;
         const resalePrice = form.resalePrice.value;
         const sellerPhone = form.sellerPhone.value;
-        const categoryId = form.categoryId.value;
         const use = form.use.value;
         const img = form.img.value;
         const description = form.description.value;
@@ -35,7 +34,7 @@ const AddProduct = () => {
             originalPrice,
             resalePrice,
             sellerPhone,
-            categoryId,
+            categoryId : '02',
             use,
             condition,
             img,
@@ -136,13 +135,14 @@ const AddProduct = () => {
                             type="text"
                             className="input input-bordered w-full max-w-xs" />
                     </div>
-                    <div className="form-control w-full max-w-xs mr-5">
+                    <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Product Category</span></label>
                         {/* //-------------------------- */}
                         <input
+                            defaultValue={'camera'}
                             name='categoryId'
                             onFocus={true}
-                            type="text"
+                            type="selected"
                             className="input input-bordered w-full max-w-xs" />
                     </div>
                 </div>

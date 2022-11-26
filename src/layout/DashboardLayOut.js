@@ -5,6 +5,7 @@ import Loader from '../pages/shared/Loader/Loader';
 import TopNavbar from '../pages/shared/TopNavbar/TopNavbar';
 import useAdmin from '../Hooks/Admin/useAdmin';
 import useSeller from '../Hooks/seller/useSeller'
+import { FaCartArrowDown, FaClipboardList, FaPlusSquare, FaRegHandshake, FaRegIdCard, FaUsers, FaUsersCog } from 'react-icons/fa';
 
 const DashboardLayOut = () => {
     const { user, isLoading } = useContext(AuthContext)
@@ -12,7 +13,7 @@ const DashboardLayOut = () => {
     const [isSeller, isSellerLoader] = useSeller(user?.email)
 
 
-    if (isAdminLoading || isLoading || isSellerLoader) {
+    if (isAdminLoading || isSellerLoader) {
         return <Loader></Loader>
     }
     return (
@@ -26,12 +27,12 @@ const DashboardLayOut = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+                    <ul className="menu py-4 pr-4 mr-6 w-60 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
 
                         {
                             !isAdmin && !isSeller &&
-                        <Link to='/dashboard/myOrders' className='mb-5 text-xl font-bold underline'>My Orders</Link>
+                        <Link to='/dashboard/myOrders' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>My Orders <FaCartArrowDown className='text-primary text-xl' /></Link>
                         }
 
                         {/* <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link> */}
@@ -39,8 +40,8 @@ const DashboardLayOut = () => {
                         {
                             isSeller &&
                             <>
-                                <Link to='/dashboard/addProduct' className='mb-5 text-xl font-bold underline'>Add Product</Link>
-                                <Link to='/dashboard/myProducts' className='mb-5 text-xl font-bold underline' >My Products</Link>
+                                <Link to='/dashboard/addProduct' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>Add Product <FaPlusSquare className='text-primary text-xl' /></Link>
+                                <Link to='/dashboard/myProducts' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between' >My Products <FaClipboardList className='text-primary text-xl' /></Link>
                             
                             </>
 
@@ -48,8 +49,8 @@ const DashboardLayOut = () => {
                         {
                             isAdmin &&
                             <>
-                                <Link to='/dashboard/allSellers' className='mb-5 text-xl font-bold underline'>All Sellers</Link>
-                                <Link to='/dashboard/allBuyers' className='mb-5 text-xl font-bold underline'>All Buyers</Link>
+                                <Link to='/dashboard/allSellers' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>All Sellers <FaUsersCog className='text-primary text-xl' /></Link>
+                                <Link to='/dashboard/allBuyers' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>All Buyers <FaUsers className='text-primary text-xl' /></Link>
                             </>
                         }
 

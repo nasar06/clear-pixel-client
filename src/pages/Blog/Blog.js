@@ -4,6 +4,7 @@ import React from 'react';
 const Blog = () => {
     return (
         <div>
+            <h1 className='text-4xl font-bold text-primary my-12 text-center'>BLOG</h1>
             <Accordion>
                 <Accordion.Panel>
                     <Accordion.Title>

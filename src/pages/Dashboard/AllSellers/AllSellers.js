@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { FaRegCheckCircle } from 'react-icons/fa';
+import { FaRegCheckCircle, FaTrashAlt } from 'react-icons/fa';
 
 const AllSellers = () => {
 
@@ -45,9 +45,14 @@ const AllSellers = () => {
             .catch(err => console.error(err))
     }
 
+    if(allSellers == 0){
+        return <h1 className='text-error mb-5 text-center'>No Seller Available</h1>
+        
+    }
 
     return (
         <div>
+            <h1 className='text-2xl text-primary text-center font-bold my-5'>All Seller</h1>
             <Table hoverable={true}>
                 <Table.Head>
                     <Table.HeadCell>
@@ -86,7 +91,8 @@ const AllSellers = () => {
                             </Table.Cell>
 
                             <Table.Cell>
-                                <button onClick={() => handelDelete(seller?._id)} className='btn btn-sm btn-error'>Delete</button>
+                            <button onClick={() => handelDelete(seller?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+                                
                             </Table.Cell>
                         </Table.Row>
                         )

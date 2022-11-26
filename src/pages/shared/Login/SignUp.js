@@ -51,6 +51,7 @@ const SignUp = () => {
         try {
             const user = await loginWithGoogle()
             toast.success('successfully login')
+            console.log('login user-------------/',user)
             navigate('/')
             userData(user.user)
 

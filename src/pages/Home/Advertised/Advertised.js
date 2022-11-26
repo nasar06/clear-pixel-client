@@ -17,7 +17,8 @@ const Advertised = () => {
         }
     })
 
-    console.log('add----------', addProducts)
+    
+
     if(addProducts ==0){
         return
     }
@@ -29,13 +30,13 @@ const Advertised = () => {
                     addProducts &&
                     addProducts.map(addProduct => <div 
                     key={addProduct?._id}
-                    className="card card-side bg-base-100 shadow-xl">
-                    <figure><img src={addProduct?.img} alt="Movie" /></figure>
+                    className="card card-side bg-base-100 shadow-xl relative">
+                    <figure><img src={addProduct?.img} alt="img is not valid" /></figure>
                     <div className="card-body">
                         {/* <h2 className="card-title">{addProduct?.productName.slice(0, 10 + '...')}</h2> */}
                         <h3 className='text-xl '>OriginalPrice: $<span className='line-through text-red-600 font-bold'>{addProduct?.originalPrice}</span></h3>
-                        <h3 className='text-xl '>ResellPrice: <span className='font-bold'>${addProduct?.resalePrice}</span></h3>
-                        <div className="card-actions justify-end">
+                        <h3 className='text-xl mb-12 '>ResellPrice: <span className='font-bold'>${addProduct?.resalePrice}</span></h3>
+                        <div className="card-actions justify-end absolute bottom-2 right-3">
                             <button className="btn btn-primary text-white">Details</button>
                         </div>
                     </div>

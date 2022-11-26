@@ -4,11 +4,13 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import moment from 'moment';
 import Loader from '../../shared/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 
 const OrderModal = ({modalData}) => {
     const {productName, resalePrice, _id, img} = modalData
     const {user} = useContext(AuthContext)
+    const navigate = useNavigate()
 
 
     const handelOrder = (e) => {
@@ -47,6 +49,7 @@ const OrderModal = ({modalData}) => {
             console.log('ordered',data)
             if(data.acknowledged){
                 toast.success('Your Order is successful')
+                navigate('/dashboard/myOrders')
             }
             
         })

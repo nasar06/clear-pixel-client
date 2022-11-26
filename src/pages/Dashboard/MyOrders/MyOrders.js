@@ -1,17 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const MyOrders = () => {
 
     const { user } = useContext(AuthContext)
 
-    const { data: orders = [] } = useQuery({
+    const { data: orders = [], refetch } = useQuery({
         queryKey: ['myOrders'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myOrders?email=${user?.email}`,{
-                headers:{
+            const res = await fetch(`http://localhost:5000/myOrders?email=${user?.email}`, {
+                headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
             })
@@ -20,14 +22,30 @@ const MyOrders = () => {
 
         }
     })
-    console.log('orders--------', orders)
+
+    const handelDelete = (id) => {
+        fetch(`http://localhost:5000/order/${id}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                toast.success('Delete yor Order')
+                refetch()
+            })
+            .catch(err => console.error(err))
+    }
+
+    if(orders == 0){
+        return <h1 className='text-error mb-5 text-center'>You have not added products</h1>
+        
+    }
 
     return (
         <div>
+            <h1 className='text-2xl text-primary text-center font-bold my-5'>My Orders</h1>
             <Table hoverable={true}>
                 <Table.Head>
                     <Table.HeadCell>
-                        
+
                     </Table.HeadCell>
                     <Table.HeadCell>
                         Product name
@@ -44,26 +62,26 @@ const MyOrders = () => {
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {
-                        
+
                         orders &&
                         orders?.map(order => <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                            <img style={{width: '50px'}} src={order?.img}></img>
+                                <img style={{ width: '50px' }} src={order?.img}></img>
                             </Table.Cell>
                             <Table.Cell>
-                            {order?.productName}
+                                {order?.productName}
                             </Table.Cell>
                             <Table.Cell>
-                            {order?.resalePrice}
+                                {order?.resalePrice}
                             </Table.Cell>
                             <Table.Cell>
-                            <button className='bg-primary text-white px-3 rounded'>Pay</button>
+                                <button className='bg-primary text-white px-3 rounded'>Pay</button>
                             </Table.Cell>
                             <Table.Cell>
-                                <button className='btn btn-sm btn-error'>Delete</button>
+                                <button onClick={() => handelDelete(order?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
                             </Table.Cell>
                         </Table.Row>)
-                        
+
                     }
                 </Table.Body>
             </Table>
