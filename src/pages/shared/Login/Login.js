@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
@@ -13,16 +13,17 @@ const Login = () => {
     const [userEmail, setUserEmail] = useState('')
     const [token] = useToken(userEmail)
     const navigate = useNavigate()
-
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
     if(token){
-        navigate('/')
+        navigate(from, {replace: true})
     }
     const handelLogin =(data) =>{
         loginUser(data.email, data.password)
         .then(result =>{
             setUserEmail(result.user.email)
-            
+            navigate(from, {replace: true})
         })
         .then(err => console.error(err))
     }
@@ -32,7 +33,7 @@ const Login = () => {
         loginWithGoogle()
         .then(result =>{
             toast.success('successfully login')
-            navigate('/')
+            navigate(from, {replace: true})
             userData(result.user)
         })
         .then(err => console.log(err))
@@ -46,7 +47,7 @@ const Login = () => {
             email: userInfo.email,
             role: 'buyer'
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://camera-alpha.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

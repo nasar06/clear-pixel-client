@@ -1,6 +1,6 @@
 # Welcome to Our WebSite
 
-This project was Tailwind with [Clear-Pixel](https://github.com/facebook/create-react-app).
+This project was Tailwind with [Clear-Pixel](https://clear-pixel-56970.firebaseapp.com/).
 
 ## Uses Plugin
 => DaisyUi
@@ -32,3 +32,29 @@ This project was Tailwind with [Clear-Pixel](https://github.com/facebook/create-
 ### Login System
 => signUp (email, password)
 => google Login system
+
+
+
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+        
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
+    ]
+  }
+
+git init
+git add . 
+git commit -m "added"
+git branch -M main
+git remote add origin  <YOUR_GITHUB_REPO_LINK>
+git push -u origin main -f

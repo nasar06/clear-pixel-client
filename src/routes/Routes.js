@@ -12,6 +12,7 @@ import ErrorPage from "../pages/shared/ErrorPage/ErrorPage";
 import Login from "../pages/shared/Login/Login";
 import SignUp from "../pages/shared/Login/SignUp";
 import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../layout/Main");
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element:<Category></Category>,
-                loader: async({params})=> await fetch(`http://localhost:5000/category/${params.id}`)
+                loader: async({params})=> await fetch(`https://camera-alpha.vercel.app/category/${params.id}`)
             },
             {
                 path: '/blog',
@@ -59,11 +60,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addProduct',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/myProducts',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/allSellers',
