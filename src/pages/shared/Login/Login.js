@@ -47,7 +47,7 @@ const Login = () => {
             email: userInfo.email,
             role: 'buyer'
         }
-        fetch('https://camera-alpha.vercel.app/users', {
+        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -56,8 +56,8 @@ const Login = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log('user inserted',data)
-            if(data.acknowledged){
+            console.log('login then user exist---------', data)
+            if(data?.acknowledged){
                 toast.success('User Inserted Successfully')
                 setUserEmail(userInfo.email)
             }

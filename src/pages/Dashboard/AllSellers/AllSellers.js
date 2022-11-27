@@ -9,7 +9,7 @@ const AllSellers = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['seller', 'user'],
         queryFn: async () => {
-            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'seller'}`,{
+            const res = await fetch(`http://localhost:5000/usersRole/${'seller'}`,{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
@@ -23,7 +23,7 @@ const AllSellers = () => {
 
     //delete seller
     const handelDelete = (id) => {
-        fetch(`https://camera-alpha.vercel.app/user/${id}`, {
+        fetch(`http://localhost:5000/user/${id}`, {
             method: 'DELETE'
         })
             .then(data => {
@@ -34,8 +34,8 @@ const AllSellers = () => {
     }
 
     //sellerVerify
-    const handelVerify = (id) => {
-        fetch(`https://camera-alpha.vercel.app/user/${id}`, {
+    const handelVerify = (email) => {
+        fetch(`http://localhost:5000/user?email=${email}`, {
             method: 'PUT'
         })
             .then(data => {
@@ -86,7 +86,7 @@ const AllSellers = () => {
                                     seller?.status === 'verify' ?
                                         <button className=' text-2xl rounded text-primary'><FaRegCheckCircle></FaRegCheckCircle></button>
                                         :
-                                        <button onClick={() => { handelVerify(seller?._id) }} className='px-3 bg-primary rounded text-white'>Verify</button>
+                                        <button onClick={() => { handelVerify(seller?.email) }} className='px-3 bg-primary rounded text-white'>Verify</button>
                                 }
                             </Table.Cell>
 

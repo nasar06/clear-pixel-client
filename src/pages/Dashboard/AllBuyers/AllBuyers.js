@@ -9,7 +9,7 @@ const AllBuyers = () => {
     const {data:allBuyers=[], refetch} = useQuery({
         queryKey: ['buyer'],
         queryFn: async()=>{
-            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'buyer'}`,{
+            const res = await fetch(`http://localhost:5000/usersRole/${'buyer'}`,{
                 headers:{
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
@@ -22,7 +22,7 @@ const AllBuyers = () => {
 
     //delete Buyer
     const handelDelete =(id) =>{
-        fetch(`https://camera-alpha.vercel.app/user/${id}`,{
+        fetch(`http://localhost:5000/user/${id}`,{
             method: 'DELETE'
         })
         .then(data => {
