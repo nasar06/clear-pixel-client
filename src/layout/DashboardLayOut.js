@@ -8,7 +8,7 @@ import useSeller from '../Hooks/seller/useSeller'
 import { FaCartArrowDown, FaClipboardList, FaPlusSquare, FaRegHandshake, FaRegIdCard, FaUsers, FaUsersCog } from 'react-icons/fa';
 
 const DashboardLayOut = () => {
-    const { user, isLoading } = useContext(AuthContext)
+    const { user} = useContext(AuthContext)
     const [isAdmin, isAdminLoading] = useAdmin(user?.email)
     const [isSeller, isSellerLoader] = useSeller(user?.email)
 

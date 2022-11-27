@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
-import { async } from '@firebase/util';
 import useToken from '../../../Hooks/Token/useToken';
 
 
@@ -27,7 +26,7 @@ const SignUp = () => {
         try {
             const user = await signUp(data.email, data.password);
 
-            
+            setUserEmail(user.user.email)
             //update name
             const info = { displayName: data.name }
             await UpdateProfileName(info);
@@ -53,6 +52,7 @@ const SignUp = () => {
             toast.success('successfully login')
             console.log('login user-------------/',user)
             navigate('/')
+            setUserEmail(user.user.email)
             userData(user.user)
 
         } catch (error) {
@@ -69,7 +69,7 @@ const SignUp = () => {
             email: userInfo.email,
             role: role ? 'seller' : 'buyer'
         }
-        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+        fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -82,7 +82,7 @@ const SignUp = () => {
 
                 if (data.acknowledged) {
                     toast.success('User Inserted Successfully')
-                    setUserEmail(userInfo.email)
+                    
 
                 }
 

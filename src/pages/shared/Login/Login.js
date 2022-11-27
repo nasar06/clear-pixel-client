@@ -23,20 +23,22 @@ const Login = () => {
         loginUser(data.email, data.password)
         .then(result =>{
             setUserEmail(result.user.email)
-            navigate(from, {replace: true})
+            console.log('after login----', result.user.email)
         })
-        .then(err => console.error(err))
+        .catch(err => console.error(err))
     }
 
     //login with google
     const handelGoogleLogin =()=>{
         loginWithGoogle()
         .then(result =>{
+            setUserEmail(result.user.email)
+            console.log('after login---**-', result.user.email)
             toast.success('successfully login')
             navigate(from, {replace: true})
             userData(result.user)
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
     }
 
 
@@ -47,7 +49,7 @@ const Login = () => {
             email: userInfo.email,
             role: 'buyer'
         }
-        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+        fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -57,9 +59,10 @@ const Login = () => {
         .then(res => res.json())
         .then(data => {
             console.log('login then user exist---------', data)
+            
             if(data?.acknowledged){
                 toast.success('User Inserted Successfully')
-                setUserEmail(userInfo.email)
+                
             }
             
         })

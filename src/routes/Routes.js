@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element:<Category></Category>,
-                loader: async({params})=> await fetch(`http://localhost:5000/category/${params.id}`)
+                loader: async({params})=> await fetch(`https://camera-alpha.vercel.app/category/${params.id}`)
             },
             {
                 path: '/blog',
