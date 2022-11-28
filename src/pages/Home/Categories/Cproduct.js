@@ -22,10 +22,12 @@ const Cproduct = ({ camera, handelOrder }) => {
 
                     </div>
                     {
-                        status === 'verified' &&
-                        <div className='mt-4'>
-                            <span className='flex text-primary items-center font-bold mt-3'><FaRegCheckCircle /> <span className='text-black'>{sellerName}</span></span>
+                        status === 'verified' ?
+                        <div className='mt-4 flex items-center'>
+                            <span className='font-bold mt-3 flex items-center mr-2'>Seller: <FaRegCheckCircle className='font-bold text-primary mx-1' /> <span className='text-black'> {sellerName}</span></span>
                         </div>
+                        :
+                        <span className='items-center font-bold mt-3'>Seller: <span className='text-black'> {sellerName}</span></span>
                     }
                     <span className='text-blue-600'>got Posted: {time.slice(0, 12)}</span>
 
