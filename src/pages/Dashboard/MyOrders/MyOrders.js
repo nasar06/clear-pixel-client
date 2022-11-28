@@ -34,8 +34,8 @@ const MyOrders = () => {
             .catch(err => console.error(err))
     }
 
-    if(orders == 0){
-        return <h1 className='text-error mb-5 text-center'>You have not added products</h1>
+    if(orders.length == 0){
+        return <h1 className='text-error mb-5 text-center'>You have not added Order</h1>
         
     }
 

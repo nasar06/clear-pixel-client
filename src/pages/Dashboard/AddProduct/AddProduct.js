@@ -68,9 +68,7 @@ const AddProduct = () => {
             })
     }
 
-    if (!user) {
-        return <Loader></Loader>
-    }
+    
     return (
         <div>
             <form onSubmit={handelOrder} className='text-center'>

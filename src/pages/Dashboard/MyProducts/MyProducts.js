@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
-import Loader from '../../shared/Loader/Loader';
+
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
@@ -44,8 +44,10 @@ const MyProducts = () => {
             .catch(err => console.error(err))
     }
 
-    if (!user) {
-        return <Loader></Loader>
+    
+
+    if (sellerProducts == 0) {
+        return <h1 className='text-error mb-5 text-center'>You have not added products</h1>
     }
     return (
         <div>
@@ -87,7 +89,7 @@ const MyProducts = () => {
                                 {
                                     sellerProduct?.advertise === 'add' ?
 
-                                    <button className='px-3 bg-blue-400 text-white rounded'>Added</button>
+                                    <button className='px-2 bg-blue-400 text-white rounded'>Added</button>
                                     :
                                     <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
                                 }

@@ -1,5 +1,6 @@
 import { Card } from 'flowbite-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BestOffer = () => {
     return (
@@ -9,14 +10,14 @@ const BestOffer = () => {
                 <div className="max-w-sm">
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                        imgSrc="https://shop.panasonic.com/sites/default/files/salsify/product/image/a469f12969313caf2183a8aed53a667febd6e048.jpg"
+                        imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
                         style={{width:'370px'}}
                     >
-                        <a href="#">
+                        <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
                             </h5>
-                        </a>
+                        </Link>
                         <div className="mt-2.5 mb-5 flex items-center">
                             <svg
                                 className="h-5 w-5 text-yellow-300"
@@ -66,26 +67,26 @@ const BestOffer = () => {
                             <span className="text-3xl font-bold text-gray-900 dark:text-white">
                                 $599
                             </span>
-                            <a
+                            <Link
                                 href="#"
                                 className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
                                 Order now
-                            </a>
+                            </Link>
                         </div>
                     </Card>
                 </div>
                 <div className="max-w-sm">
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                        imgSrc="https://pro.sony/s3/2017/09/04150224/F65-category-image.jpg"
+                        imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
                         style={{width:'370px'}}
                     >   
-                        <a href="#">
+                        <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
                             </h5>
-                        </a>
+                        </Link>
                         <div className="mt-2.5 mb-5 flex items-center">
                             <svg
                                 className="h-5 w-5 text-yellow-300"
@@ -135,26 +136,26 @@ const BestOffer = () => {
                             <span className="text-3xl font-bold text-gray-900 dark:text-white">
                                 $599
                             </span>
-                            <a
+                            <Link
                                 href="#"
                                 className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
                                 Order now
-                            </a>
+                            </Link>
                         </div>
                     </Card>
                 </div>
                 <div className="max-w-sm">
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                        imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST0w6DawtVD6mTvDhsclI6dRu2PcEmzlPcTQ&usqp=CAU"
+                        imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
                         style={{width:'370px'}}
                     >
-                        <a href="#">
+                        <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
                             </h5>
-                        </a>
+                        </Link>
                         <div className="mt-2.5 mb-5 flex items-center">
                             <svg
                                 className="h-5 w-5 text-yellow-300"
@@ -204,12 +205,12 @@ const BestOffer = () => {
                             <span className="text-3xl font-bold text-gray-900 dark:text-white">
                                 $599
                             </span>
-                            <a
+                            <Link
                                 href="#"
                                 className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-primary dark:focus:ring-blue-800"
                             >
                                 Order now
-                            </a>
+                            </Link>
                         </div>
                     </Card>
                 </div>
