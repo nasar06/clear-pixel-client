@@ -67,7 +67,7 @@ const SignUp = () => {
             email: userInfo.email,
             role: role ? 'seller' : 'buyer'
         }
-        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
+        fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

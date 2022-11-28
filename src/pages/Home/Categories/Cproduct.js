@@ -9,24 +9,24 @@ const Cproduct = ({ camera, handelOrder }) => {
             <div className="card lg:card-side bg-base-100 shadow-xl mt-24">
                 <figure><img style={{ width: '400px', height: '350px' }} src={img} alt="Album" /></figure>
                 <div className="card-body">
-                    <h2 className="card-title text-3xl font-bold">{productName}</h2>
+                    <h2 className="card-title text-2xl font-bold">{productName}</h2>
                     <div className='flex items-center justify-between mt-6'>
-                        <span className='text-xl font-bold text-red-800 flex items-center gap-2'><FaMapMarkerAlt />{location}</span>
-                        <span className='text-xl font-bold '>Years Of Use: <strong className='text-primary'>{use}</strong></span>
+                        <span className='font-bold text-red-800 flex items-center gap-2'><FaMapMarkerAlt />{location}</span>
+                        <span className='font-bold '>Years Of Use: <strong className='text-primary'>{use}</strong></span>
                     </div>
                     <div className='mt-5'>
-                        <span className='text-2xl font-bold flex items-center mt-3'>OriginalPrice $<strong className='text-red-600 line-through'>{originalPrice}</strong></span>
-                        <span className='text-2xl font-bold flex items-center mt-3'>ResalePrice $<strong className=''>{resalePrice}</strong></span>
+                        <span className='text-xl font-bold flex items-center mt-3'>OriginalPrice $<strong className='text-red-600 line-through'>{originalPrice}</strong></span>
+                        <span className='text-xl font-bold flex items-center mt-3'>ResalePrice $<strong className=''>{resalePrice}</strong></span>
 
                     </div>
                     {
                         status === 'verified' &&
                         <div className='mt-4'>
-                            <span className='text-xl flex text-primary items-center font-bold mt-3'><FaRegCheckCircle /> <span className='text-black'>{sellerName}</span></span>
+                            <span className='flex text-primary items-center font-bold mt-3'><FaRegCheckCircle /> <span className='text-black'>{sellerName}</span></span>
                             
                         </div>
                     }
-                    <span>{time.slice(0, 12)}</span>
+                    <span className='text-blue-600'>got Posted: {time.slice(0, 12)}</span>
 
                     <div className="card-actions justify-end">
                         {/* The button to open modal */}

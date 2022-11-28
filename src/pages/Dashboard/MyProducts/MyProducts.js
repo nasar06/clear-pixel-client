@@ -13,7 +13,7 @@ const MyProducts = () => {
     const { data: sellerProducts = [], refetch } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`)
+            const res = await fetch(`https://camera-alpha.vercel.app/myProducts?email=${user?.email}`)
             const data = await res.json();
             return data
 
@@ -22,7 +22,7 @@ const MyProducts = () => {
 
     //delete sellers product
     const handelDelete = (id) => {
-        fetch(`http://localhost:5000/myProducts/${id}`, {
+        fetch(`https://camera-alpha.vercel.app/myProducts/${id}`, {
             method: 'DELETE'
         })
             .then(data => {
@@ -34,7 +34,7 @@ const MyProducts = () => {
 
     //put one property
     const handelAdvertised = (id) => {
-        fetch(`http://localhost:5000/advertise/${id}`, {
+        fetch(`https://camera-alpha.vercel.app/advertise/${id}`, {
             method: 'PUT'
         })
             .then(data => {
@@ -87,7 +87,7 @@ const MyProducts = () => {
                                 {
                                     sellerProduct?.advertise === 'add' ?
 
-                                    <button className='px-3 bg-primary text-white rounded'>Added</button>
+                                    <button className='px-3 bg-blue-400 text-white rounded'>Added</button>
                                     :
                                     <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
                                 }

@@ -1,6 +1,6 @@
 # Welcome to Our WebSite
 
-This project was Tailwind with [Clear-Pixel](https://clear-pixel-56970.firebaseapp.com/).
+This project was Tailwind with [Clear-Pixel](https://camera-alpha.vercel.app/).
 
 ## Uses Plugin
 => DaisyUi
