@@ -12,7 +12,7 @@ const MyOrders = () => {
     const { data: orders = [], refetch } = useQuery({
         queryKey: ['myOrders'],
         queryFn: async () => {
-            const res = await fetch(`https://camera-alpha.vercel.app/myOrders?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:5000/myOrders?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
@@ -24,7 +24,7 @@ const MyOrders = () => {
     })
 
     const handelDelete = (id) => {
-        fetch(`https://camera-alpha.vercel.app/order/${id}`, {
+        fetch(`http://localhost:5000/order/${id}`, {
             method: 'DELETE'
         })
             .then(() => {
@@ -64,7 +64,9 @@ const MyOrders = () => {
                     {
 
                         orders &&
-                        orders?.map(order => <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                        orders?.map(order => <Table.Row 
+                        key={order?._id}
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                 <img style={{ width: '50px' }} src={order?.img}></img>
                             </Table.Cell>

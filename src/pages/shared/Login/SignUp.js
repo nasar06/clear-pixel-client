@@ -26,7 +26,7 @@ const SignUp = () => {
         try {
             const user = await signUp(data.email, data.password);
 
-            setUserEmail(user.user.email)
+            
             //update name
             const info = { displayName: data.name }
             await UpdateProfileName(info);
@@ -51,8 +51,6 @@ const SignUp = () => {
             const user = await loginWithGoogle()
             toast.success('successfully login')
             console.log('login user-------------/',user)
-            navigate('/')
-            setUserEmail(user.user.email)
             userData(user.user)
 
         } catch (error) {
@@ -69,7 +67,7 @@ const SignUp = () => {
             email: userInfo.email,
             role: role ? 'seller' : 'buyer'
         }
-        fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
+        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -78,7 +76,7 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                
+                setUserEmail(userInfo.email)
 
                 if (data.acknowledged) {
                     toast.success('User Inserted Successfully')

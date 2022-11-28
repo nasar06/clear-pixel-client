@@ -37,7 +37,7 @@ const OrderModal = ({modalData}) => {
             img
         }
 
-        fetch('https://camera-alpha.vercel.app/orders', {
+        fetch('http://localhost:5000/orders', {
             method: 'POST',
             headers:{
                 'content-type': 'application/json'

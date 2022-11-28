@@ -10,7 +10,7 @@ const Categories = () => {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('https://camera-alpha.vercel.app/categories');
+            const res = await fetch('http://localhost:5000/categories');
             const data = await res.json();
             return data
         }
@@ -25,7 +25,9 @@ const Categories = () => {
 
                 {
                     categories &&
-                    categories.map(category => <div className="card w-96 bg-base-100 shadow-xl">
+                    categories.map(category => <div 
+                    key={category?._id}
+                    className="card w-96 bg-base-100 shadow-xl">
                         <figure><img src={category?.categoryImage} style={{width:'100%', height: '270px'}} alt="Shoes" /></figure>
                         <div className="card-body text-center">
                             <div className='flex items-center text-center'>
