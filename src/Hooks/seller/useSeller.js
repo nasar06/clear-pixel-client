@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react"
 
-const useSeller = (email) =>{
+const useSeller = (email) => {
     const [isSeller, setIsSeller] = useState(false)
     const [isSellerLoader, setIsSellerLoader] = useState(true)
-    useEffect( ()=>{
-        if(email){
+    
+    useEffect(() => {
+        if (email) {
             fetch(`https://camera-alpha.vercel.app/users/seller/${email}`)
-            .then(res => res.json())
-            .then(data =>{
-                console.log(data)
-                setIsSeller(data.isSeller)
-                setIsSellerLoader(false)
-            })
+                .then(res => res.json())
+                .then(data => {
+
+                    setIsSeller(data.isSeller)
+                    if (data?.isSeller) {
+                        setIsSellerLoader(false)
+                    }
+                })
         }
-    },[email])
+    }, [email])
+
     return [isSeller, isSellerLoader]
 }
 

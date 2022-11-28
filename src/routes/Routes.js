@@ -24,25 +24,25 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element:<Home></Home>
+                element: <Home></Home>
             },
             {
                 path: '/login',
-                element:<Login></Login>
+                element: <Login></Login>
             },
             {
                 path: '/signup',
-                element:<SignUp></SignUp>
+                element: <SignUp></SignUp>
             },
             {
                 path: '/category/:id',
-                element:<Category></Category>,
-                loader: async({params})=> await fetch(`https://camera-alpha.vercel.app/category/${params.id}`)
+                element: <Category></Category>,
+                loader: async ({ params }) => await fetch(`https://camera-alpha.vercel.app/category/${params.id}`)
             },
             {
                 path: '/blog',
-                element:<Blog></Blog>
-                
+                element: <Blog></Blog>
+
             },
         ]
     },
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path:'*',
+        path: '*',
         element: <ErrorPage></ErrorPage>
     }
 ])

@@ -8,14 +8,15 @@ import useSeller from '../Hooks/seller/useSeller'
 import { FaCartArrowDown, FaClipboardList, FaPlusSquare, FaRegHandshake, FaRegIdCard, FaUsers, FaUsersCog } from 'react-icons/fa';
 
 const DashboardLayOut = () => {
-    const { user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [isAdmin, isAdminLoading] = useAdmin(user?.email)
     const [isSeller, isSellerLoader] = useSeller(user?.email)
 
-
-    if (isAdminLoading || isSellerLoader) {
+    
+    if (isAdminLoading && isSellerLoader) {
         return <Loader></Loader>
     }
+
     return (
         <div>
             <TopNavbar></TopNavbar>
@@ -35,8 +36,6 @@ const DashboardLayOut = () => {
                         <Link to='/dashboard/myOrders' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>My Orders <FaCartArrowDown className='text-primary text-xl' /></Link>
                         }
 
-                        {/* <Link className='mb-5 text-xl font-bold underline' to='/dashboard/myWishlist'>My WishList</Link> */}
-
                         {
                             isSeller &&
                             <>
@@ -46,6 +45,7 @@ const DashboardLayOut = () => {
                             </>
 
                         }
+
                         {
                             isAdmin &&
                             <>
@@ -54,10 +54,7 @@ const DashboardLayOut = () => {
                             </>
                         }
 
-
-
                     </ul>
-
                 </div>
             </div>
         </div>

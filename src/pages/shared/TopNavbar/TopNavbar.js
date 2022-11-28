@@ -6,14 +6,16 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import logo from '../../../img/logo.png'
 
 const TopNavbar = () => {
+    
     const { user, signOutUser } = useContext(AuthContext)
     const navigate = useNavigate()
 
+    //LogOut
     const handelSignOut = () => {
         signOutUser()
             .then(() => {
                 navigate('/login')
-             })
+            })
             .then((err) => console.error(err))
     }
 
@@ -53,9 +55,6 @@ const TopNavbar = () => {
                         <button onClick={handelSignOut}>Sign out</button>
                     </Dropdown.Item>
                 </Dropdown>
-
-
-
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
@@ -68,14 +67,9 @@ const TopNavbar = () => {
                     <Link to='/blog'>Blog</Link>
                 </Navbar.Link>
 
-
-
-
                 {
                     user?.uid ?
                         <>
-                        
-
                             <Navbar.Link>
                                 <Link to='/dashboard'>Dashboard</Link>
                             </Navbar.Link>
@@ -89,8 +83,6 @@ const TopNavbar = () => {
                             <Link to='/login'>Login</Link>
                         </Navbar.Link>
                 }
-
-
 
             </Navbar.Collapse>
         </Navbar>

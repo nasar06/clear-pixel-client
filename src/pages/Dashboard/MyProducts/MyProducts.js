@@ -16,7 +16,6 @@ const MyProducts = () => {
             const res = await fetch(`https://camera-alpha.vercel.app/myProducts?email=${user?.email}`)
             const data = await res.json();
             return data
-
         }
     })
 
@@ -44,11 +43,12 @@ const MyProducts = () => {
             .catch(err => console.error(err))
     }
 
-    
+
 
     if (sellerProducts == 0) {
         return <h1 className='text-error mb-5 text-center'>You have not added products</h1>
     }
+    
     return (
         <div>
             <Table hoverable={true}>
@@ -89,15 +89,15 @@ const MyProducts = () => {
                                 {
                                     sellerProduct?.advertise === 'add' ?
 
-                                    <button className='px-2 bg-blue-400 text-white rounded'>Added</button>
-                                    :
-                                    <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
+                                        <button className='px-2 bg-blue-400 text-white rounded'>Added</button>
+                                        :
+                                        <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
                                 }
 
                             </Table.Cell>
                             <Table.Cell>
-                            <button onClick={() => handelDelete(sellerProduct?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
-                               
+                                <button onClick={() => handelDelete(sellerProduct?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+
                             </Table.Cell>
                         </Table.Row>
                         )

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import moment from 'moment';
 import toast from 'react-hot-toast';
-import Loader from '../../shared/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
@@ -11,11 +10,11 @@ const AddProduct = () => {
     const [category, setCategory] = useState('01')
 
     //set category
-    const handelCategory = (e) =>{
+    const handelCategory = (e) => {
         setCategory(e.target.value)
     }
-    
 
+    //handel order
     const handelOrder = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -32,7 +31,7 @@ const AddProduct = () => {
         const condition = form.condition.value;
         const time = moment().format('Do MM YYYY, h:mm:ss a')
 
-
+        //set product data
         const orderInfo = {
             sellerName,
             sellerEmail,
@@ -48,7 +47,6 @@ const AddProduct = () => {
             description,
             time,
         }
-        console.log(orderInfo)
 
         fetch('https://camera-alpha.vercel.app/addProduct', {
             method: 'POST',
@@ -59,7 +57,6 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('add product-------', data)
                 if (data.acknowledged) {
                     toast.success('Your Order is successful')
                     navigate('/dashboard/myProducts')
@@ -68,7 +65,7 @@ const AddProduct = () => {
             })
     }
 
-    
+
     return (
         <div>
             <form onSubmit={handelOrder} className='text-center'>

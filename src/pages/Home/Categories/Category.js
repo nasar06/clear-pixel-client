@@ -5,26 +5,25 @@ import Cproduct from './Cproduct';
 import OrderModal from './OrderModal';
 
 const Category = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [modalData, setModalData] = useState([])
     const navigate = useNavigate()
     const cameras = useLoaderData([])
 
-    const handelOrder = (data)=>{
-        if(!user){
-        //    return <Navigate to='/login' state={{from: location}} replace></Navigate>
-        navigate('/login')
+    
+    const handelOrder = (data) => {
+        if (!user) {
+            navigate('/login')
         }
         setModalData(data)
-        console.log('modal handel ',data)
     }
-    console.log(cameras)
+
     return (
         <div>
             <h1 className='text-4xl font-bold'>Category Products</h1>
             <div>
                 {
-                    cameras&&
+                    cameras &&
                     cameras?.map(camera => <Cproduct
                         key={camera?._id}
                         camera={camera}
@@ -32,13 +31,13 @@ const Category = () => {
                     ></Cproduct>)
                 }
             </div>
-                {
-                    modalData &&
-                    <OrderModal
+            {
+                modalData &&
+                <OrderModal
                     modalData={modalData}
-                    ></OrderModal>
-                }
-            
+                ></OrderModal>
+            }
+
         </div>
     );
 };

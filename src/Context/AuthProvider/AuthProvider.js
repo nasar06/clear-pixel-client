@@ -11,6 +11,7 @@ const AuthProvider = ({children}) => {
     const [isLoading, setIsLoadin]= useState(true)
     const googleProvider = new GoogleAuthProvider()
 
+
     //create User with Email and password
     const signUp = (email, password) =>{
         setIsLoadin(true)
@@ -41,7 +42,6 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
 
-
     //observe user
     useEffect( ()=>{
         const unSubscribe = onAuthStateChanged(auth, currentUser=>{
@@ -50,6 +50,7 @@ const AuthProvider = ({children}) => {
         })
         return ()=> unSubscribe()
     },[])
+
 
     const authInfo = {
         signUp,
@@ -60,6 +61,8 @@ const AuthProvider = ({children}) => {
         user,
         isLoading
     }
+
+    
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

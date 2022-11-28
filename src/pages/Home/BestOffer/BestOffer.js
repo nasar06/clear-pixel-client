@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BestOffer = () => {
+    
     return (
         <div>
             <h1 className='mt-24 mb-12 text-4xl font-bold text-center'>Todays Best Offer</h1>
@@ -11,7 +12,7 @@ const BestOffer = () => {
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
                         imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
-                        style={{width:'370px'}}
+                        style={{ width: '370px' }}
                     >
                         <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -80,8 +81,8 @@ const BestOffer = () => {
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
                         imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
-                        style={{width:'370px'}}
-                    >   
+                        style={{ width: '370px' }}
+                    >
                         <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
@@ -149,7 +150,7 @@ const BestOffer = () => {
                     <Card
                         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
                         imgSrc="https://media.istockphoto.com/id/185278433/photo/black-digital-slr-camera-in-a-white-background.jpg?s=612x612&w=0&k=20&c=OOCbhvOF0W-eVhhrm-TxbgLfbKhFfs4Lprjd7hiQBNU="
-                        style={{width:'370px'}}
+                        style={{ width: '370px' }}
                     >
                         <Link>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

@@ -23,6 +23,7 @@ const MyOrders = () => {
         }
     })
 
+    //delete order
     const handelDelete = (id) => {
         fetch(`https://camera-alpha.vercel.app/order/${id}`, {
             method: 'DELETE'
@@ -34,9 +35,8 @@ const MyOrders = () => {
             .catch(err => console.error(err))
     }
 
-    if(orders.length == 0){
+    if (orders.length == 0) {
         return <h1 className='text-error mb-5 text-center'>You have not added Order</h1>
-        
     }
 
     return (
@@ -64,9 +64,9 @@ const MyOrders = () => {
                     {
 
                         orders &&
-                        orders?.map(order => <Table.Row 
-                        key={order?._id}
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                        orders?.map(order => <Table.Row
+                            key={order?._id}
+                            className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                 <img style={{ width: '50px' }} src={order?.img}></img>
                             </Table.Cell>

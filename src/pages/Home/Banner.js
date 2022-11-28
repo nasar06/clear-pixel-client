@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Banner = () => {
+    
     return (
         <div className="hero min-h-[450px] rounded-lg my-12" style={{ backgroundImage: `url("https://i.pinimg.com/736x/8a/87/75/8a8775dfc4ba988d9e3003f09c08bddc.jpg")` }}>
             <div className="hero-overlay bg-opacity-60 rounded-lg"></div>

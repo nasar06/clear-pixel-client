@@ -9,7 +9,7 @@ const AllSellers = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['seller', 'user'],
         queryFn: async () => {
-            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'seller'}`,{
+            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'seller'}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
@@ -19,7 +19,6 @@ const AllSellers = () => {
         }
     })
 
-    console.log('alluser---------',allSellers)
 
     //delete seller
     const handelDelete = (id) => {
@@ -45,9 +44,10 @@ const AllSellers = () => {
             .catch(err => console.error(err))
     }
 
-    if(allSellers == 0){
+
+    if (allSellers == 0) {
         return <h1 className='text-error mb-5 text-center'>No Seller Available</h1>
-        
+
     }
 
     return (
@@ -91,13 +91,12 @@ const AllSellers = () => {
                             </Table.Cell>
 
                             <Table.Cell>
-                            <button onClick={() => handelDelete(seller?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
-                                
+                                <button onClick={() => handelDelete(seller?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+
                             </Table.Cell>
                         </Table.Row>
                         )
                     }
-
 
                 </Table.Body>
             </Table>

@@ -5,41 +5,44 @@ import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../../Hooks/Token/useToken';
+import moment from 'moment';
+import useSeller from '../../../Hooks/seller/useSeller';
 
 
 const SignUp = () => {
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [role, setRole] = useState(false)
     const [userEmail, setUserEmail] = useState('')
     const [token] = useToken(userEmail)
+    const [isSeller] = useSeller(userEmail)
     const { signUp, UpdateProfileName, loginWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
 
 
-    if (token) {
+    if (token || isSeller) {
         navigate('/')
     }
 
-
+    //signUp with email and password
     const handelSignUp = async (data) => {
 
         try {
+
+            //signUp
             const user = await signUp(data.email, data.password);
 
-            
             //update name
             const info = { displayName: data.name }
             await UpdateProfileName(info);
 
             //post user
             userData(user.user)
-            
 
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error)
         }
-
-
 
     }
 
@@ -50,23 +53,27 @@ const SignUp = () => {
         try {
             const user = await loginWithGoogle()
             toast.success('successfully login')
-            console.log('login user-------------/',user)
+
+            //insert user db
             userData(user.user)
 
         } catch (error) {
             toast.error(error.message)
         }
-
-
     }
 
     // post users collection
     const userData = (userInfo) => {
+        const time = moment().format('Do MM YYYY, h:mm:ss a')
+
+        //set user info for db
         const user = {
             name: userInfo.displayName,
             email: userInfo.email,
-            role: role ? 'seller' : 'buyer'
+            role: role ? 'seller' : 'buyer',
+            time
         }
+
         fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
@@ -80,10 +87,7 @@ const SignUp = () => {
 
                 if (data.acknowledged) {
                     toast.success('User Inserted Successfully')
-                    
-
                 }
-
             })
     }
 
@@ -136,9 +140,7 @@ const SignUp = () => {
                         </div>
                     </div>
                     <input className='btn bg-primary text-white font-bold w-full' value="Sign Up" type="submit" />
-                    <div>
-                        {/* {loginError && <p className='text-red-600'>{loginError}</p>} */}
-                    </div>
+                    
                 </form>
                 <p>You have an account <Link className='text-secondary' to="/login">Please login</Link></p>
                 <div className="divider">OR</div>

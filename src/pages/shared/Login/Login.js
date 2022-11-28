@@ -5,71 +5,77 @@ import svg from '../../../img/bg.svg'
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../../Hooks/Token/useToken';
+import moment from 'moment';
 
 
 const Login = () => {
+
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const {loginUser, loginWithGoogle} = useContext(AuthContext)
+    const { loginUser, loginWithGoogle } = useContext(AuthContext)
     const [userEmail, setUserEmail] = useState('')
     const [token] = useToken(userEmail)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
-    if(token){
-        navigate(from, {replace: true})
+
+    if (token) {
+        navigate(from, { replace: true })
     }
-    const handelLogin =(data) =>{
+
+    //login with email and password
+    const handelLogin = (data) => {
         loginUser(data.email, data.password)
-        .then(result =>{
-            setUserEmail(result.user.email)
-            console.log('after login----', result.user.email)
-        })
-        .catch(err => console.error(err))
+            .then(result => {
+                setUserEmail(result.user.email)
+            })
+            .catch(err => console.error(err))
     }
 
     //login with google
-    const handelGoogleLogin =()=>{
+    const handelGoogleLogin = () => {
         loginWithGoogle()
-        .then(result =>{
-            toast.success('successfully login')
-            userData(result.user)
-        })
-        .catch(err => console.log(err))
+            .then(result => {
+                toast.success('successfully login')
+                userData(result.user)
+            })
+            .catch(err => console.log(err))
     }
 
+    //post users to database
+    const userData = (userInfo) => {
+        const time = moment().format('Do MM YYYY, h:mm:ss a')
 
-    //post users
-    const userData = (userInfo) =>{
+        //set user info for db
         const user = {
-            name : userInfo.displayName,
+            name: userInfo.displayName,
             email: userInfo.email,
-            role: 'buyer'
+            role: 'buyer',
+            time
         }
+
         fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(user)
+            body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data => {
-            setUserEmail(userInfo.email)
-            
-            if(data?.acknowledged){
-                toast.success('User Inserted Successfully')
-                
-            }
-            
-        })
+            .then(res => res.json())
+            .then(data => {
+                setUserEmail(userInfo.email)
+
+                if (data?.acknowledged) {
+                    toast.success('User Inserted Successfully')
+                }
+            })
     }
-   
+
 
     return (
         <div className='flex items-center justify-center'>
             <div className='hidden md:block'>
-                <img style={{width: '800px'}} src={svg}></img>
+                <img style={{ width: '800px' }} src={svg}></img>
             </div>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl font-bold text-center'>Login</h2>

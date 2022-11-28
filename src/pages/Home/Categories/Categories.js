@@ -17,7 +17,6 @@ const Categories = () => {
     })
 
 
-
     return (
         <div>
             <h1 className='text-4xl mb-12 mt-24 font-bold'>Categories</h1>
@@ -25,19 +24,20 @@ const Categories = () => {
 
                 {
                     categories &&
-                    categories.map(category => <div 
-                    key={category?._id}
-                    className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={category?.categoryImage} style={{width:'100%', height: '270px'}} alt="Shoes" /></figure>
+                    categories.map(category => <div
+                        key={category?._id}
+                        className="card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={category?.categoryImage} style={{ width: '100%', height: '270px' }} alt="Shoes" /></figure>
                         <div className="card-body text-center">
                             <div className='flex items-center text-center'>
                                 <h2 className="card-title mr-5">{category?.categoryName}</h2>
                                 <div className="text-xl text-primary"><Link to={`/category/${category?.categoryId}`}><FaArrowRight /></Link></div>
                             </div>
                         </div>
-                    </div>)
+                    </div>
+                    )
                 }
-
+                
             </div>
         </div>
     );

@@ -3,7 +3,9 @@ import React from 'react';
 import { FaMapMarkerAlt, FaRegCheckCircle } from "react-icons/fa";
 
 const Cproduct = ({ camera, handelOrder }) => {
-    const { img, productName,sellerName,time, location, originalPrice, resalePrice, use, status } = camera
+
+    const { img, productName, sellerName, time, location, originalPrice, resalePrice, use, status } = camera
+    
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl mt-24">
@@ -23,7 +25,6 @@ const Cproduct = ({ camera, handelOrder }) => {
                         status === 'verified' &&
                         <div className='mt-4'>
                             <span className='flex text-primary items-center font-bold mt-3'><FaRegCheckCircle /> <span className='text-black'>{sellerName}</span></span>
-                            
                         </div>
                     }
                     <span className='text-blue-600'>got Posted: {time.slice(0, 12)}</span>

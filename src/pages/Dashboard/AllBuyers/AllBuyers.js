@@ -6,11 +6,11 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const AllBuyers = () => {
 
-    const {data:allBuyers=[], refetch} = useQuery({
+    const { data: allBuyers = [], refetch } = useQuery({
         queryKey: ['buyer'],
-        queryFn: async()=>{
-            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'buyer'}`,{
-                headers:{
+        queryFn: async () => {
+            const res = await fetch(`https://camera-alpha.vercel.app/usersRole/${'buyer'}`, {
+                headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
             })
@@ -21,21 +21,22 @@ const AllBuyers = () => {
 
 
     //delete Buyer
-    const handelDelete =(id) =>{
-        fetch(`https://camera-alpha.vercel.app/user/${id}`,{
+    const handelDelete = (id) => {
+        fetch(`https://camera-alpha.vercel.app/user/${id}`, {
             method: 'DELETE'
         })
-        .then(data => {
-            toast.success('Buyer is deleted')
-            refetch()
-        })
-        .catch(err => console.error(err))
+            .then(data => {
+                toast.success('Buyer is deleted')
+                refetch()
+            })
+            .catch(err => console.error(err))
+    }
+    
+
+    if (allBuyers == 0) {
+        return <h1 className='text-error mb-5 text-center'>No Buyers Available</h1>
     }
 
-    if(allBuyers == 0){
-        return <h1 className='text-error mb-5 text-center'>No Buyers Available</h1>
-        
-    }
     return (
         <div>
             <h1 className='text-2xl text-primary text-center font-bold my-5'>All Buyers</h1>
@@ -52,27 +53,27 @@ const AllBuyers = () => {
                     </Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                
+
                     {
                         allBuyers &&
-                        allBuyers.map(buyer => <Table.Row 
-                        key={buyer?._id}
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                            {buyer?.name}
-                        </Table.Cell>
-                        <Table.Cell>
-                            {buyer?.email}
-                        </Table.Cell>
-                        
-                        <Table.Cell>
-                        <button onClick={()=>handelDelete(buyer?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
-                            
-                        </Table.Cell>
-                    </Table.Row>
-                    )
+                        allBuyers.map(buyer => <Table.Row
+                            key={buyer?._id}
+                            className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                {buyer?.name}
+                            </Table.Cell>
+                            <Table.Cell>
+                                {buyer?.email}
+                            </Table.Cell>
+
+                            <Table.Cell>
+                                <button onClick={() => handelDelete(buyer?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+
+                            </Table.Cell>
+                        </Table.Row>
+                        )
                     }
-                
+
 
                 </Table.Body>
             </Table>
