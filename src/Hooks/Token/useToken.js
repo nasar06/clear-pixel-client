@@ -5,7 +5,7 @@ const useToken = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`https://camera-alpha.vercel.app/jwt?email=${email}`)
+            fetch(`http://localhost:5000/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem('access-token', data.accessToken)

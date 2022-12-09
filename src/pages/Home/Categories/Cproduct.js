@@ -1,11 +1,36 @@
 import { Card } from 'flowbite-react';
-import React from 'react';
-import { FaMapMarkerAlt, FaRegCheckCircle } from "react-icons/fa";
+import React, { useContext, useState } from 'react';
+import { FaHeart, FaMapMarkerAlt, FaRegCheckCircle } from "react-icons/fa";
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Cproduct = ({ camera, handelOrder }) => {
-
+    const { user } = useContext(AuthContext)
+    const [wish, setWish] = useState(true)
     const { img, productName, sellerName, time, location, originalPrice, resalePrice, use, status } = camera
-    
+
+    //handel wishlist
+    const handelWishList = (data) => {
+
+        const wishData = {
+            productName: data.productName,
+            wname: user?.displayName,
+            wemail: user?.email,
+            wishList: 'love'
+        }
+
+        fetch(`http://localhost:5000/wishList/${data?._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishData)
+        })
+            .then(() => {
+                setWish(false)
+            })
+            .catch(err => console.log(err))
+
+    }
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl mt-24">
@@ -23,16 +48,20 @@ const Cproduct = ({ camera, handelOrder }) => {
                     </div>
                     {
                         status === 'verified' ?
-                        <div className='mt-4 flex items-center'>
-                            <span className='font-bold mt-3 flex items-center mr-2'>Seller: <FaRegCheckCircle className='font-bold text-primary mx-1' /> <span className='text-black'> {sellerName}</span></span>
-                        </div>
-                        :
-                        <span className='items-center font-bold mt-3'>Seller: <span className='text-black'> {sellerName}</span></span>
+                            <div className='mt-4 flex items-center'>
+                                <span className='font-bold mt-3 flex items-center mr-2'>Seller: <FaRegCheckCircle className='font-bold text-primary mx-1' /> <span className='text-black'> {sellerName}</span></span>
+                            </div>
+                            :
+                            <span className='items-center font-bold mt-3'>Seller: <span className='text-black'> {sellerName}</span></span>
                     }
                     <span className='text-blue-600'>got Posted: {time.slice(0, 12)}</span>
+                    <div>
 
-                    <div className="card-actions justify-end">
+                    </div>
+                    <div className="card-actions justify-end items-center flex">
                         {/* The button to open modal */}
+
+                        <FaHeart onClick={() => handelWishList(camera)} className='text-3xl mr-5' style={wish ? { color: 'gray' } : { color: 'red' }}></FaHeart>
                         <label onClick={() => handelOrder(camera)} htmlFor="Order-modal" className="btn btn-primary text-white">Order Now</label>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ const Login = () => {
             time
         }
 
-        fetch(`https://camera-alpha.vercel.app/users?email=${userInfo.email}`, {
+        fetch(`http://localhost:5000/users?email=${userInfo.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

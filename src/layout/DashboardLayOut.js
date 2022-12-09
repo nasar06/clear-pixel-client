@@ -5,14 +5,14 @@ import Loader from '../pages/shared/Loader/Loader';
 import TopNavbar from '../pages/shared/TopNavbar/TopNavbar';
 import useAdmin from '../Hooks/Admin/useAdmin';
 import useSeller from '../Hooks/seller/useSeller'
-import { FaCartArrowDown, FaClipboardList, FaPlusSquare, FaRegHandshake, FaRegIdCard, FaUsers, FaUsersCog } from 'react-icons/fa';
+import { FaCartArrowDown, FaClipboardList, FaHeart, FaPlusSquare, FaRegHandshake, FaRegIdCard, FaUsers, FaUsersCog } from 'react-icons/fa';
 
 const DashboardLayOut = () => {
     const { user } = useContext(AuthContext)
     const [isAdmin, isAdminLoading] = useAdmin(user?.email)
     const [isSeller, isSellerLoader] = useSeller(user?.email)
 
-    
+
     if (isAdminLoading && isSellerLoader) {
         return <Loader></Loader>
     }
@@ -33,7 +33,10 @@ const DashboardLayOut = () => {
 
                         {
                             !isAdmin && !isSeller &&
-                        <Link to='/dashboard/myOrders' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>My Orders <FaCartArrowDown className='text-primary text-xl' /></Link>
+                            <>
+                                <Link to='/dashboard/myOrders' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>My Orders <FaCartArrowDown className='text-primary text-xl' /></Link>
+                                <Link to='/dashboard/myWishlist' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>My WishList <FaHeart className='text-primary text-xl' ></FaHeart></Link>
+                            </>
                         }
 
                         {
@@ -41,7 +44,7 @@ const DashboardLayOut = () => {
                             <>
                                 <Link to='/dashboard/addProduct' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between'>Add Product <FaPlusSquare className='text-primary text-xl' /></Link>
                                 <Link to='/dashboard/myProducts' className='mb-2 bg-gray-100 p-2 font-bold underline flex items-center justify-between' >My Products <FaClipboardList className='text-primary text-xl' /></Link>
-                            
+
                             </>
 
                         }

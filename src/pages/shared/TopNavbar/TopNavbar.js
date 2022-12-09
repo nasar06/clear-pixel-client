@@ -24,6 +24,7 @@ const TopNavbar = () => {
         <Navbar className='border my-12'
             fluid={true}
             rounded={true}
+            
         >
             <Navbar.Brand to="https://flowbite.com/">
                 <img
@@ -31,9 +32,9 @@ const TopNavbar = () => {
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                 />
-                <span className="sm:none self-center whitespace-nowrap text-xl font-bold text-primary dark:text-white">
+                <Link to='/'><span className="sm:none self-center whitespace-nowrap text-xl font-bold text-primary dark:text-white">
                     Clear Pixel
-                </span>
+                </span></Link>
                 <label htmlFor="dashboard-drawer" className=" drawer-button lg:hidden ml-5 text-xl"><FaAlignLeft /></label>
             </Navbar.Brand>
             <div className="flex md:order-2">

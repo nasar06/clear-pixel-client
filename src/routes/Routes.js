@@ -6,6 +6,7 @@ import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
+import MyWishlist from "../pages/Dashboard/MyWishlist/MyWishlist";
 import Category from "../pages/Home/Categories/Category";
 import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/shared/ErrorPage/ErrorPage";
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <Category></Category>,
-                loader: async ({ params }) => await fetch(`https://camera-alpha.vercel.app/category/${params.id}`)
+                loader: async ({ params }) => await fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
                 path: '/blog',
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allBuyers',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/myWishlist',
+                element: <MyWishlist></MyWishlist>
             }
         ]
     },

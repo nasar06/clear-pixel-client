@@ -1,54 +1,35 @@
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
+const MyWishlist = () => {
 
-const MyProducts = () => {
-    const { user } = useContext(AuthContext)
-
-    //get sellerProducts
-    const { data: sellerProducts = [], refetch } = useQuery({
+    const {user} = useContext(AuthContext)
+    //get wishlistProducts
+    const { data: wishlistProducts = [], refetch } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/wishList/${user?.email}`)
             const data = await res.json();
             return data
         }
     })
 
-    //delete sellers product
-    const handelDelete = (id) => {
-        fetch(`http://localhost:5000/myProducts/${id}`, {
+    //
+    const handelDelete =(id) =>{
+        fetch(`http://localhost:5000/wishlist/${id}`, {
             method: 'DELETE'
         })
             .then(data => {
-                toast.success('product is deleted')
+                toast.success('wishProduct is deleted')
                 refetch()
             })
             .catch(err => console.error(err))
     }
 
-    //put one property
-    const handelAdvertised = (id) => {
-        fetch(`http://localhost:5000/advertise/${id}`, {
-            method: 'PUT'
-        })
-            .then(data => {
-                toast.success('Advertised your Product')
-                refetch()
-            })
-            .catch(err => console.error(err))
-    }
-
-
-
-    if (sellerProducts == 0) {
-        return <h1 className='text-error mb-5 text-center'>You have not added products</h1>
-    }
-    
     return (
         <div>
             <Table hoverable={true}>
@@ -71,32 +52,26 @@ const MyProducts = () => {
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {
-                        sellerProducts &&
-                        sellerProducts.map(sellerProduct => <Table.Row
-                            key={sellerProduct?._id}
+                        wishlistProducts &&
+                        wishlistProducts.map(wishProduct => <Table.Row
+                            key={wishProduct?._id}
                             className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                {sellerProduct?.productName.slice(0, 40) + '...'}
+                                {wishProduct?.productName.slice(0, 40) + '...'}
                                 {/* {description.slice(0, 100) + '...'} */}
                             </Table.Cell>
                             <Table.Cell>
-                                {sellerProduct?.location}
+                                {/* {wishProduct?.location} */}
                             </Table.Cell>
                             <Table.Cell>
-                                {sellerProduct?.resalePrice}
+                                {/* {wishProduct?.resalePrice} */}
                             </Table.Cell>
                             <Table.Cell>
-                                {
-                                    sellerProduct?.advertise === 'add' ?
-
-                                        <button className='px-2 bg-blue-400 text-white rounded'>Added</button>
-                                        :
-                                        <button onClick={() => handelAdvertised(sellerProduct?._id)} className='px-3 bg-primary text-white rounded'>Advertise</button>
-                                }
+                              
 
                             </Table.Cell>
                             <Table.Cell>
-                                <button onClick={() => handelDelete(sellerProduct?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
+                                <button onClick={() => handelDelete(wishProduct?._id)} className='text-red-600 font-bold text-2xl'><FaTrashAlt /></button>
 
                             </Table.Cell>
                         </Table.Row>
@@ -109,4 +84,4 @@ const MyProducts = () => {
     );
 };
 
-export default MyProducts;
+export default MyWishlist;
