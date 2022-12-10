@@ -18,7 +18,7 @@ const Cproduct = ({ camera, handelOrder }) => {
             wishList: 'love'
         }
 
-        fetch(`http://localhost:5000/wishList/${data?._id}`, {
+        fetch(`https://camera-alpha.vercel.app/wishList/${data?._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

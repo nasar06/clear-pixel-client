@@ -48,7 +48,7 @@ const AddProduct = () => {
             time,
         }
 
-        fetch('http://localhost:5000/addProduct', {
+        fetch('https://camera-alpha.vercel.app/addProduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

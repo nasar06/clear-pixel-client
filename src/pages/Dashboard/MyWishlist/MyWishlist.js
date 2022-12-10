@@ -12,7 +12,7 @@ const MyWishlist = () => {
     const { data: wishlistProducts = [], refetch } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/wishList/${user?.email}`)
+            const res = await fetch(`https://camera-alpha.vercel.app/wishList/${user?.email}`)
             const data = await res.json();
             return data
         }
@@ -20,7 +20,7 @@ const MyWishlist = () => {
 
     //
     const handelDelete =(id) =>{
-        fetch(`http://localhost:5000/wishlist/${id}`, {
+        fetch(`https://camera-alpha.vercel.app/wishlist/${id}`, {
             method: 'DELETE'
         })
             .then(data => {

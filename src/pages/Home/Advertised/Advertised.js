@@ -6,7 +6,7 @@ const Advertised = () => {
     const { data: addProducts = [] } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertise/${'add'}`, {
+            const res = await fetch(`https://camera-alpha.vercel.app/advertise/${'add'}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
